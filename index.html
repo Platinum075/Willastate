@@ -937,171 +937,232 @@ ${body}
 
 function willPage(){
 
-const editing=!!willData;
+  if(willData){
 
-return `
+    return `
+    <section class="hero" style="padding:24px">
 
-<section class="hero" style="padding:24px">
+      <div class="eyebrow">✍️ Willastate</div>
 
- <div class="eyebrow">✍️ Willastate</div>
+      <h1 style="font-size:32px">
+        My Will
+      </h1>
 
- <h1 style="font-size:32px">
-   My Will
- </h1>
+      <p>
+        Your saved wishes and estate information.
+      </p>
 
- <p>
-   Organize your wishes and estate information
-   in one private place.
- </p>
+    </section>
 
-</section>
+    <div class="card stack">
 
-<div class="card stack">
+      <div class="notice">
+        🔒 Your Will information is stored privately
+        in this browser prototype.
+      </div>
 
- <div class="notice">
-   This prototype helps you organize your wishes.
-   Legal requirements for a valid will vary by state.
-   Willastate does not currently certify this as a
-   legally executed will.
- </div>
+      <div>
+        <strong>Full legal name</strong>
+        <p>${escapeHTML(willData.name)}</p>
+      </div>
 
- <div class="form-grid">
+      <div>
+        <strong>State</strong>
+        <p>${escapeHTML(willData.state || 'Not entered')}</p>
+      </div>
 
-   <div>
-     <label>Full legal name</label>
-     <input
-       id="willName"
-       value="${escapeAttr(willData?.name || '')}"
-       placeholder="Your name">
-   </div>
+      <div>
+        <strong>My wishes</strong>
+        <p>${escapeHTML(willData.wishes || 'No wishes entered')}</p>
+      </div>
 
-   <div>
-     <label>State</label>
-     <input
-       id="willState"
-       value="${escapeAttr(willData?.state || '')}"
-       placeholder="Georgia">
-   </div>
+      <div>
+        <strong>Funeral or final wishes</strong>
+        <p>${escapeHTML(willData.funeral || 'No final wishes entered')}</p>
+      </div>
 
- </div>
+      <div class="notice">
+        Last saved: ${escapeHTML(willData.savedAt)}
+      </div>
 
- <div>
-   <label>My wishes</label>
+      <div class="small-actions">
 
-   <textarea
-     id="willWishes"
-     placeholder="Write your wishes and instructions...">${escapeHTML(willData?.wishes || '')}</textarea>
- </div>
+        <button
+          class="btn primary"
+          onclick="editWill()">
+          ✏️ Edit My Will
+        </button>
 
- <div>
-   <label>Funeral or final wishes</label>
+        <button
+          class="btn danger"
+          onclick="deleteWill()">
+          🗑️ Delete My Will
+        </button>
 
-   <textarea
-     id="willFuneral"
-     placeholder="Optional...">${escapeHTML(willData?.funeral || '')}</textarea>
- </div>
+      </div>
 
- <div class="row">
+    </div>
+    `;
+  }
 
-   <span class="badge locked">
-     🔒 Private
-   </span>
+  return `
 
-   <div style="display:flex;gap:8px;flex-wrap:wrap">
+  <section class="hero" style="padding:24px">
 
-     ${
-       editing
-       ? `
-       <button class="btn danger"
-         onclick="deleteWill()">
-         Delete
-       </button>
-       `
-       : ''
-     }
+    <div class="eyebrow">✍️ Willastate</div>
 
-     <button class="btn primary"
-       onclick="saveWill()">
-       ${editing?'Save Changes':'Save My Will'}
-     </button>
+    <h1 style="font-size:32px">
+      My Will
+    </h1>
 
-   </div>
+    <p>
+      Organize your wishes and estate information
+      in one private place.
+    </p>
 
- </div>
+  </section>
 
-</div>
+  <div class="card stack">
 
-${
- willData
- ? `
- <div style="height:16px"></div>
+    <div class="notice">
+      This prototype helps you organize your wishes.
+      Legal requirements for a valid will vary by state.
+      Willastate does not currently certify this as a
+      legally executed will.
+    </div>
 
- <div class="card">
+    <div class="form-grid">
 
-   <div class="row">
+      <div>
+        <label>Full legal name</label>
+        <input
+          id="willName"
+          placeholder="Your name">
+      </div>
 
-     <div>
-       <h3>Saved Will</h3>
-       <p style="margin:0">
-         Last saved: ${escapeHTML(willData.savedAt)}
-       </p>
-     </div>
+      <div>
+        <label>State</label>
+        <input
+          id="willState"
+          placeholder="Georgia">
+      </div>
 
-     <span class="badge">
-       ✓ Saved
-     </span>
+    </div>
 
-   </div>
+    <div>
+      <label>My wishes</label>
+      <textarea
+        id="willWishes"
+        placeholder="Write your wishes and instructions..."></textarea>
+    </div>
 
- </div>
- `
- : ''
+    <div>
+      <label>Funeral or final wishes</label>
+      <textarea
+        id="willFuneral"
+        placeholder="Optional..."></textarea>
+    </div>
+
+    <div class="row">
+
+      <span class="badge locked">
+        🔒 Private
+      </span>
+
+      <button
+        class="btn primary"
+        onclick="saveWill()">
+        💾 Save My Will
+      </button>
+
+    </div>
+
+  </div>
+
+  `;
 }
 
-`;
+
+function editWill(){
+
+  if(!willData){
+    return showPage('will');
+  }
+
+  document.getElementById('content').innerHTML = `
+
+  <section class="hero" style="padding:24px">
+
+    <div class="eyebrow">✏️ Editing</div>
+
+    <h1 style="font-size:32px">
+      Edit My Will
+    </h1>
+
+    <p>
+      Make your changes below, then save them.
+    </p>
+
+  </section>
+
+  <div class="card stack">
+
+    <div class="form-grid">
+
+      <div>
+        <label>Full legal name</label>
+        <input
+          id="willName"
+          value="${escapeAttr(willData.name || '')}">
+      </div>
+
+      <div>
+        <label>State</label>
+        <input
+          id="willState"
+          value="${escapeAttr(willData.state || '')}">
+      </div>
+
+    </div>
+
+    <div>
+      <label>My wishes</label>
+      <textarea
+        id="willWishes">${escapeHTML(willData.wishes || '')}</textarea>
+    </div>
+
+    <div>
+      <label>Funeral or final wishes</label>
+      <textarea
+        id="willFuneral">${escapeHTML(willData.funeral || '')}</textarea>
+    </div>
+
+    <div class="small-actions">
+
+      <button
+        class="btn secondary"
+        onclick="showPage('will')">
+        Cancel
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="saveWill()">
+        💾 Save Changes
+      </button>
+
+      <button
+        class="btn danger"
+        onclick="deleteWill()">
+        🗑️ Delete
+      </button>
+
+    </div>
+
+  </div>
+
+  `;
 }
-
-function saveWill(){
-
-const name=document.getElementById('willName').value.trim();
-const state=document.getElementById('willState').value.trim();
-const wishes=document.getElementById('willWishes').value.trim();
-const funeral=document.getElementById('willFuneral').value.trim();
-
-if(!name){
-  return toast('Please enter your full legal name.');
-}
-
-willData={
- name,
- state,
- wishes,
- funeral,
- savedAt:new Date().toLocaleString()
-};
-
-if(saveData('willastateWill',willData)){
-  toast('My Will saved successfully.');
-  showPage('will');
-}
-
-}
-
-function deleteWill(){
-
-confirmDelete(
- 'Delete My Will?',
- 'This will remove your saved Will information from this prototype.',
- ()=>{
-   localStorage.removeItem('willastateWill');
-   willData=null;
-   toast('My Will deleted.');
-   showPage('will');
- }
-);
-
-}
-
 /* =========================================================
    MOBILE DIARY
    ========================================================= */
@@ -1562,198 +1623,278 @@ confirmDelete(
 
 function informationPage(){
 
-const editing=!!infoData;
+  if(infoData){
 
-return `
+    return `
 
-<section class="hero" style="padding:24px">
+    <section class="hero" style="padding:24px">
 
- <div class="eyebrow">
-   📝 Willastate
- </div>
+      <div class="eyebrow">
+        📝 Willastate
+      </div>
 
- <h1 style="font-size:32px">
-   My Information
- </h1>
+      <h1 style="font-size:32px">
+        My Information
+      </h1>
 
- <p>
-   Personal information you want organized
-   and protected.
- </p>
+      <p>
+        Your saved personal information.
+      </p>
 
-</section>
+    </section>
 
-<div class="card stack">
+    <div class="card stack">
 
- <div class="form-grid">
+      <div class="notice">
+        🔒 Your information is stored privately
+        in this browser prototype.
+      </div>
 
-   <div>
+      <div>
+        <strong>Full name</strong>
+        <p>${escapeHTML(infoData.name)}</p>
+      </div>
 
-     <label>Full name</label>
+      <div>
+        <strong>Preferred phone</strong>
+        <p>${escapeHTML(infoData.phone || 'Not entered')}</p>
+      </div>
 
-     <input
-       id="infoName"
-       value="${escapeAttr(infoData?.name || '')}"
-       placeholder="Your name">
+      <div>
+        <strong>Important family contact</strong>
+        <p>${escapeHTML(infoData.family || 'Not entered')}</p>
+      </div>
 
-   </div>
+      <div>
+        <strong>Other notes</strong>
+        <p>${escapeHTML(infoData.notes || 'Not entered')}</p>
+      </div>
 
-   <div>
+      <div>
+        <strong>Important information</strong>
+        <p>${escapeHTML(infoData.important || 'No information entered')}</p>
+      </div>
 
-     <label>Preferred phone</label>
+      <div class="notice">
+        Last saved: ${escapeHTML(infoData.savedAt)}
+      </div>
 
-     <input
-       id="infoPhone"
-       value="${escapeAttr(infoData?.phone || '')}"
-       placeholder="(000) 000-0000">
+      <div class="small-actions">
 
-   </div>
+        <button
+          class="btn primary"
+          onclick="editInformation()">
+          ✏️ Edit My Information
+        </button>
 
-   <div>
+        <button
+          class="btn danger"
+          onclick="deleteInformation()">
+          🗑️ Delete My Information
+        </button>
 
-     <label>Important family contact</label>
+      </div>
 
-     <input
-       id="infoFamily"
-       value="${escapeAttr(infoData?.family || '')}"
-       placeholder="Name">
+    </div>
 
-   </div>
+    `;
+  }
 
-   <div>
+  return `
 
-     <label>Other notes</label>
+  <section class="hero" style="padding:24px">
 
-     <input
-       id="infoNotes"
-       value="${escapeAttr(infoData?.notes || '')}"
-       placeholder="Optional">
+    <div class="eyebrow">
+      📝 Willastate
+    </div>
 
-   </div>
+    <h1 style="font-size:32px">
+      My Information
+    </h1>
 
- </div>
+    <p>
+      Personal information you want organized
+      and protected.
+    </p>
 
- <div>
+  </section>
 
-   <label>
-     Important information
-   </label>
+  <div class="card stack">
 
-   <textarea
-     id="infoImportant"
-     placeholder="Information you want organized privately...">${escapeHTML(infoData?.important || '')}</textarea>
+    <div class="form-grid">
 
- </div>
+      <div>
+        <label>Full name</label>
 
- <div class="row">
+        <input
+          id="infoName"
+          placeholder="Your name">
+      </div>
 
-   <span class="badge locked">
-     🔒 Private
-   </span>
+      <div>
+        <label>Preferred phone</label>
 
-   <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input
+          id="infoPhone"
+          placeholder="(000) 000-0000">
+      </div>
 
-     ${
-       editing
-       ?
-       `
-       <button class="btn danger"
-         onclick="deleteInformation()">
-         Delete
-       </button>
-       `
-       :
-       ''
-     }
+      <div>
+        <label>Important family contact</label>
 
-     <button class="btn primary"
-       onclick="saveInformation()">
-       ${editing?'Save Changes':'Save Information'}
-     </button>
+        <input
+          id="infoFamily"
+          placeholder="Name">
+      </div>
 
-   </div>
+      <div>
+        <label>Other notes</label>
 
- </div>
+        <input
+          id="infoNotes"
+          placeholder="Optional">
+      </div>
 
-</div>
+    </div>
 
-${
- infoData
- ?
- `
- <div style="height:16px"></div>
+    <div>
 
- <div class="card">
+      <label>
+        Important information
+      </label>
 
-   <div class="row">
+      <textarea
+        id="infoImportant"
+        placeholder="Information you want organized privately..."></textarea>
 
-     <div>
+    </div>
 
-       <h3>Information Saved</h3>
+    <div class="row">
 
-       <p style="margin:0">
-         Last saved:
-         ${escapeHTML(infoData.savedAt)}
-       </p>
+      <span class="badge locked">
+        🔒 Private
+      </span>
 
-     </div>
+      <button
+        class="btn primary"
+        onclick="saveInformation()">
+        💾 Save Information
+      </button>
 
-     <span class="badge">
-       ✓ Saved
-     </span>
+    </div>
 
-   </div>
+  </div>
 
- </div>
- `
- :
- ''
+  `;
 }
 
-`;
-}
 
-function saveInformation(){
+function editInformation(){
 
-const name=document.getElementById('infoName').value.trim();
-const phone=document.getElementById('infoPhone').value.trim();
-const family=document.getElementById('infoFamily').value.trim();
-const notes=document.getElementById('infoNotes').value.trim();
-const important=document.getElementById('infoImportant').value.trim();
+  if(!infoData){
+    return showPage('info');
+  }
 
-if(!name){
-  return toast('Please enter your name.');
-}
+  document.getElementById('content').innerHTML = `
 
-infoData={
- name,
- phone,
- family,
- notes,
- important,
- savedAt:new Date().toLocaleString()
-};
+  <section class="hero" style="padding:24px">
 
-if(saveData('willastateInformation',infoData)){
-  toast('My Information saved successfully.');
-  showPage('info');
-}
+    <div class="eyebrow">
+      ✏️ Editing
+    </div>
 
-}
+    <h1 style="font-size:32px">
+      Edit My Information
+    </h1>
 
-function deleteInformation(){
+    <p>
+      Make your changes below, then save them.
+    </p>
 
-confirmDelete(
- 'Delete My Information?',
- 'This will remove your saved information from this prototype.',
- ()=>{
-   localStorage.removeItem('willastateInformation');
-   infoData=null;
-   toast('My Information deleted.');
-   showPage('info');
- }
-);
+  </section>
 
+  <div class="card stack">
+
+    <div class="form-grid">
+
+      <div>
+
+        <label>Full name</label>
+
+        <input
+          id="infoName"
+          value="${escapeAttr(infoData.name || '')}">
+
+      </div>
+
+      <div>
+
+        <label>Preferred phone</label>
+
+        <input
+          id="infoPhone"
+          value="${escapeAttr(infoData.phone || '')}">
+
+      </div>
+
+      <div>
+
+        <label>Important family contact</label>
+
+        <input
+          id="infoFamily"
+          value="${escapeAttr(infoData.family || '')}">
+
+      </div>
+
+      <div>
+
+        <label>Other notes</label>
+
+        <input
+          id="infoNotes"
+          value="${escapeAttr(infoData.notes || '')}">
+
+      </div>
+
+    </div>
+
+    <div>
+
+      <label>
+        Important information
+      </label>
+
+      <textarea
+        id="infoImportant">${escapeHTML(infoData.important || '')}</textarea>
+
+    </div>
+
+    <div class="small-actions">
+
+      <button
+        class="btn secondary"
+        onclick="showPage('info')">
+        Cancel
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="saveInformation()">
+        💾 Save Changes
+      </button>
+
+      <button
+        class="btn danger"
+        onclick="deleteInformation()">
+        🗑️ Delete
+      </button>
+
+    </div>
+
+  </div>
+
+  `;
 }
 
 /* =========================================================
