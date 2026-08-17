@@ -2636,276 +2636,538 @@ confirmDelete(
 
 function trustedPage(){
 
-return `
+  return `
 
-<section class="hero" style="padding:24px">
+  <section class="hero" style="padding:24px">
 
- <div class="eyebrow">
-   👥 My Trusted People
- </div>
+    <div class="eyebrow">
+      👥 My Trusted People
+    </div>
 
- <h1 style="font-size:32px">
-   Choose 1 or 2 people you trust.
- </h1>
+    <h1 style="font-size:32px">
+      People you trust.
+    </h1>
 
- <p>
-   They must knowingly accept the responsibility.
-   They do not get access to your private information
-   simply by becoming a Trusted Person.
- </p>
+    <p>
+      Choose up to 2 people you trust to help carry out
+      your wishes when the time comes.
+    </p>
 
-</section>
+    <div class="notice">
+      🔒 <strong>Your Trusted People cannot see your
+      private Willastate information while you are alive.</strong>
+      They must receive and accept your invitation first.
+    </div>
 
-<div class="grid">
+  </section>
 
- <div class="card stack">
 
-   <h3>
-     Invite a Trusted Person
-   </h3>
+  <div class="grid">
 
-   <div>
+    <!-- INVITE -->
 
-     <label>
-       Full name
-     </label>
+    <div class="card stack">
 
-     <input
-       id="tpName"
-       placeholder="Sarah Johnson">
+      <h3>
+        👥 Add a Trusted Person
+      </h3>
 
-   </div>
+      ${
+        trusted.length >= 2
+        ?
+        `
+        <div class="notice">
+          You currently have 2 Trusted People.
+          You can remove one before adding another.
+        </div>
+        `
+        :
+        `
+        <div>
 
-   <div>
+          <label>
+            Full name
+          </label>
 
-     <label>
-       Email address
-     </label>
+          <input
+            id="tpName"
+            placeholder="Enter their full name">
 
-     <input
-       id="tpEmail"
-       type="email"
-       placeholder="sarah@example.com">
+        </div>
 
-   </div>
+        <div>
 
-   <button
-     class="btn primary"
-     onclick="inviteTrusted()">
-     Send Invitation
-   </button>
+          <label>
+            Email address
+          </label>
 
-   <small class="muted">
-     If they are not a Willastate member,
-     the email will invite them to create a free
-     account and accept or decline.
-   </small>
+          <input
+            id="tpEmail"
+            type="email"
+            placeholder="name@example.com">
 
- </div>
+        </div>
 
- <div class="card">
+        <button
+          class="btn primary"
+          onclick="inviteTrusted()">
 
-   <h3>
-     Your Trusted People
-   </h3>
+          📧 Send Invitation
 
-   <div class="list">
+        </button>
 
-     ${
-       trusted.length
-       ?
-       trusted.map((t,i)=>`
+        <small class="muted">
 
-       <div class="list-item">
+          They will receive an invitation to become
+          your Trusted Person.
 
-         <div class="row">
+        </small>
+        `
+      }
 
-           <strong>
-             ${escapeHTML(t.name)}
-           </strong>
+    </div>
 
-           <span class="badge ${t.status==='Confirmed'?'':'pending'}">
 
-             ${t.status==='Confirmed'?'🟢':'🟡'}
+    <!-- TRUSTED PEOPLE -->
 
-             ${escapeHTML(t.status)}
+    <div class="card">
 
-           </span>
+      <h3>
+        Your Trusted People
+      </h3>
 
-         </div>
+      <p>
+        ${trusted.length} of 2 selected
+      </p>
 
-         <div class="muted">
-           ${escapeHTML(t.email)}
-         </div>
+      <div class="list">
 
-         <div class="small-actions">
+        ${
+          trusted.length
+          ?
+          trusted.map((t,i)=>`
 
-           <button
-             class="small-btn"
-             onclick="editTrusted(${i})">
-             ✏️ Edit
-           </button>
+          <div class="list-item">
 
-           <button
-             class="small-btn delete"
-             onclick="removeTrusted(${i})">
-             🗑️ Delete
-           </button>
+            <div class="row">
 
-         </div>
+              <strong>
+                ${escapeHTML(t.name)}
+              </strong>
 
-       </div>
+              <span class="badge ${
+                t.status === 'Accepted'
+                ? ''
+                : t.status === 'Declined'
+                ? 'pending'
+                : 'pending'
+              }">
 
-       `).join('')
-       :
-       `
-       <p>
-         You haven't selected anyone yet.
-       </p>
-       `
-     }
+                ${
+                  t.status === 'Accepted'
+                  ? '🟢 Accepted'
+                  : t.status === 'Declined'
+                  ? '🔴 Declined'
+                  : '🟡 Invitation Sent'
+                }
 
-   </div>
+              </span>
 
- </div>
+            </div>
 
-</div>
+            <div class="muted" style="margin-top:6px">
 
-<div style="height:16px"></div>
+              📧 ${escapeHTML(t.email)}
 
-<div class="card">
+            </div>
 
- <h3>
-   How the invitation works
- </h3>
+            <div class="muted" style="margin-top:5px">
 
- <div class="list">
+              Invited:
+              ${escapeHTML(t.invitedAt || 'Recently')}
 
-   <div class="list-item">
-     1. You send the invitation by email.
-   </div>
+            </div>
 
-   <div class="list-item">
-     2. They create or sign into Willastate.
-   </div>
 
-   <div class="list-item">
-     3. They review the responsibility and
-     Accept or Decline.
-   </div>
+            <div class="small-actions">
 
-   <div class="list-item">
-     4. Only after accepting are they a confirmed
-     Trusted Person.
-   </div>
+              <button
+                class="small-btn"
+                onclick="editTrusted(${i})">
 
- </div>
+                ✏️ Edit
 
-</div>
+              </button>
 
-<div style="height:16px"></div>
 
-<div class="card">
+              <button
+                class="small-btn"
+                onclick="resendTrusted(${i})">
 
- <h3>
-   Release settings
- </h3>
+                📧 Resend
 
- <p>
-   Trusted People are limited to 1–2, but
-   individual information can be released to
-   multiple recipients.
- </p>
+              </button>
 
- <button
-   class="btn secondary"
-   onclick="showPage('release')">
-   Open Release Settings
- </button>
 
-</div>
+              <button
+                class="small-btn delete"
+                onclick="removeTrusted(${i})">
 
-`;
+                🗑️ Remove
+
+              </button>
+
+            </div>
+
+          </div>
+
+          `).join('')
+
+          :
+
+          `
+          <div class="empty">
+
+            <div style="font-size:45px">
+              👥
+            </div>
+
+            <h3>
+              No Trusted People yet.
+            </h3>
+
+            <p>
+              Add someone you trust using the
+              invitation form.
+            </p>
+
+          </div>
+          `
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div style="height:16px"></div>
+
+
+  <!-- HOW IT WORKS -->
+
+  <div class="card">
+
+    <h3>
+      How Trusted People works
+    </h3>
+
+    <div class="list">
+
+      <div class="list-item">
+        <strong>1. You invite them</strong>
+        <div class="muted">
+          Enter their name and email address.
+        </div>
+      </div>
+
+      <div class="list-item">
+        <strong>2. They receive an invitation</strong>
+        <div class="muted">
+          They are asked to become your Trusted Person.
+        </div>
+      </div>
+
+      <div class="list-item">
+        <strong>3. They accept or decline</strong>
+        <div class="muted">
+          They must knowingly accept the responsibility.
+        </div>
+      </div>
+
+      <div class="list-item">
+        <strong>4. Your information stays private</strong>
+        <div class="muted">
+          Being a Trusted Person does not automatically
+          give them access to your private vault.
+        </div>
+      </div>
+
+      <div class="list-item">
+        <strong>5. Release settings control access</strong>
+        <div class="muted">
+          You decide what information can be released,
+          to whom, and under what circumstances.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div style="height:16px"></div>
+
+
+  <!-- RELEASE SETTINGS -->
+
+  <div class="card">
+
+    <div class="row">
+
+      <div>
+
+        <h3>
+          🚨 Release Settings
+        </h3>
+
+        <p style="margin:4px 0 0">
+
+          Decide who receives information and
+          when it can be released.
+
+        </p>
+
+      </div>
+
+      <button
+        class="btn secondary"
+        onclick="showPage('release')">
+
+        Open Settings
+
+      </button>
+
+    </div>
+
+  </div>
+
+  `;
+
 }
+
+
+/* =========================================================
+   INVITE TRUSTED PERSON
+   ========================================================= */
 
 function inviteTrusted(){
 
-const n=document.getElementById('tpName').value.trim();
-const e=document.getElementById('tpEmail').value.trim();
+  const name =
+    document.getElementById('tpName').value.trim();
 
-if(!n||!e){
-  return toast('Enter a name and email.');
+  const email =
+    document.getElementById('tpEmail').value.trim();
+
+
+  if(!name){
+
+    return toast(
+      'Please enter their full name.'
+    );
+
+  }
+
+
+  if(!email){
+
+    return toast(
+      'Please enter their email address.'
+    );
+
+  }
+
+
+  if(!email.includes('@') || !email.includes('.')){
+
+    return toast(
+      'Please enter a valid email address.'
+    );
+
+  }
+
+
+  if(trusted.length >= 2){
+
+    return toast(
+      'You can have only 2 Trusted People.'
+    );
+
+  }
+
+
+  const alreadyExists =
+    trusted.some(
+      t =>
+        t.email.toLowerCase() ===
+        email.toLowerCase()
+    );
+
+
+  if(alreadyExists){
+
+    return toast(
+      'That person is already on your Trusted People list.'
+    );
+
+  }
+
+
+  trusted.push({
+
+    id: Date.now(),
+
+    name: name,
+
+    email: email,
+
+    status: 'Invitation Sent',
+
+    invitedAt: new Date().toLocaleString()
+
+  });
+
+
+  if(saveData('willastateTrusted',trusted)){
+
+    toast(
+      'Trusted Person invitation created.'
+    );
+
+    showPage('trusted');
+
+  }
+
 }
 
-if(trusted.length>=2){
-  return toast('You can have only 2 Trusted People.');
-}
 
-trusted.push({
- id:Date.now(),
- name:n,
- email:e,
- status:'Invitation Sent'
-});
-
-saveData('willastateTrusted',trusted);
-
-toast(
- 'Invitation created. In the production build this will send a secure email invitation.'
-);
-
-showPage('trusted');
-
-}
+/* =========================================================
+   EDIT TRUSTED PERSON
+   ========================================================= */
 
 function editTrusted(index){
 
-const t=trusted[index];
+  const t = trusted[index];
 
-const name=prompt(
- 'Edit Trusted Person name:',
- t.name
-);
 
-if(name===null)return;
+  const name = prompt(
+    'Edit Trusted Person name:',
+    t.name
+  );
 
-const email=prompt(
- 'Edit email address:',
- t.email
-);
 
-if(email===null)return;
+  if(name === null){
+    return;
+  }
 
-if(!name.trim()||!email.trim()){
-  return toast('Name and email cannot be empty.');
+
+  const email = prompt(
+    'Edit email address:',
+    t.email
+  );
+
+
+  if(email === null){
+    return;
+  }
+
+
+  if(!name.trim()){
+
+    return toast(
+      'Name cannot be empty.'
+    );
+
+  }
+
+
+  if(!email.trim()){
+
+    return toast(
+      'Email cannot be empty.'
+    );
+
+  }
+
+
+  t.name = name.trim();
+
+  t.email = email.trim();
+
+
+  if(saveData('willastateTrusted',trusted)){
+
+    toast(
+      'Trusted Person updated.'
+    );
+
+    showPage('trusted');
+
+  }
+
 }
 
-t.name=name.trim();
-t.email=email.trim();
 
-saveData('willastateTrusted',trusted);
+/* =========================================================
+   RESEND TRUSTED PERSON INVITATION
+   ========================================================= */
 
-toast('Trusted Person updated.');
+function resendTrusted(index){
 
-showPage('trusted');
+  const t = trusted[index];
+
+
+  t.status = 'Invitation Sent';
+
+  t.invitedAt =
+    new Date().toLocaleString();
+
+
+  if(saveData('willastateTrusted',trusted)){
+
+    toast(
+      'Invitation resent to ' + t.email
+    );
+
+    showPage('trusted');
+
+  }
 
 }
+
+
+/* =========================================================
+   REMOVE TRUSTED PERSON
+   ========================================================= */
 
 function removeTrusted(index){
 
-confirmDelete(
- 'Remove Trusted Person?',
- 'This person will be removed from your Trusted People list.',
- ()=>{
-   trusted.splice(index,1);
-   saveData('willastateTrusted',trusted);
-   toast('Trusted Person removed.');
-   showPage('trusted');
- }
-);
+  confirmDelete(
+
+    'Remove Trusted Person?',
+
+    'This person will be removed from your Trusted People list.',
+
+    ()=>{
+
+      trusted.splice(index,1);
+
+      if(saveData('willastateTrusted',trusted)){
+
+        toast(
+          'Trusted Person removed.'
+        );
+
+        showPage('trusted');
+
+      }
+
+    }
+
+  );
 
 }
-
 /* =========================================================
    RELEASE SETTINGS
    ========================================================= */
