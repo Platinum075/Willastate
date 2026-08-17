@@ -1896,7 +1896,128 @@ function editInformation(){
 
   `;
 }
+/* =========================================================
+   SAVE MY WILL
+   ========================================================= */
 
+function saveWill(){
+
+  const name = document.getElementById('willName').value.trim();
+  const state = document.getElementById('willState').value.trim();
+  const wishes = document.getElementById('willWishes').value.trim();
+  const funeral = document.getElementById('willFuneral').value.trim();
+
+  if(!name){
+    return toast('Please enter your full legal name.');
+  }
+
+  if(!wishes){
+    return toast('Please enter your wishes.');
+  }
+
+  willData = {
+    name: name,
+    state: state,
+    wishes: wishes,
+    funeral: funeral,
+    savedAt: new Date().toLocaleString()
+  };
+
+  if(saveData('willastateWill', willData)){
+
+    toast('My Will saved successfully.');
+
+    showPage('will');
+
+  }
+
+}
+
+
+/* =========================================================
+   DELETE MY WILL
+   ========================================================= */
+
+function deleteWill(){
+
+  confirmDelete(
+    'Delete My Will?',
+    'Your saved Will information will be permanently removed from this browser prototype.',
+    ()=>{
+
+      willData = null;
+
+      localStorage.removeItem('willastateWill');
+
+      toast('My Will deleted.');
+
+      showPage('will');
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   SAVE MY INFORMATION
+   ========================================================= */
+
+function saveInformation(){
+
+  const name = document.getElementById('infoName').value.trim();
+  const phone = document.getElementById('infoPhone').value.trim();
+  const family = document.getElementById('infoFamily').value.trim();
+  const notes = document.getElementById('infoNotes').value.trim();
+  const important = document.getElementById('infoImportant').value.trim();
+
+  if(!name){
+    return toast('Please enter your full name.');
+  }
+
+  infoData = {
+    name: name,
+    phone: phone,
+    family: family,
+    notes: notes,
+    important: important,
+    savedAt: new Date().toLocaleString()
+  };
+
+  if(saveData('willastateInformation', infoData)){
+
+    toast('My Information saved successfully.');
+
+    showPage('info');
+
+  }
+
+}
+
+
+/* =========================================================
+   DELETE MY INFORMATION
+   ========================================================= */
+
+function deleteInformation(){
+
+  confirmDelete(
+    'Delete My Information?',
+    'Your saved personal information will be permanently removed from this browser prototype.',
+    ()=>{
+
+      infoData = null;
+
+      localStorage.removeItem('willastateInformation');
+
+      toast('My Information deleted.');
+
+      showPage('info');
+
+    }
+  );
+
+}
 /* =========================================================
    MY MESSAGES
    ========================================================= */
