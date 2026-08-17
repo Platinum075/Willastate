@@ -1,1 +1,3129 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="theme-color" content="#4b24a8"> <title>Willastate — Your life. Your way. Your wishes. Your legacy.</title> <style> :root{ --purple:#4b24a8; --purple2:#6b42d8; --ink:#171522; --muted:#6d6878; --bg:#f7f5fb; --card:#fff; --line:#e8e3f1; --green:#1f9d62; --pink:#e94f9d; --shadow:0 10px 30px rgba(42,25,82,.10); --radius:20px; } *{box-sizing:border-box} body{ margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif; color:var(--ink); background:var(--bg) } button,input,textarea,select{font:inherit} button{cursor:pointer} .app{min-height:100vh} .topbar{ height:72px; background:#fff; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 24px; position:sticky; top:0; z-index:20 } .brand{ font-family:Georgia,serif; color:var(--purple); font-size:25px; font-weight:700; display:flex; gap:8px; align-items:center } .brand span{font-size:18px} .top-actions{ display:flex; gap:10px; align-items:center } .iconbtn{ border:0; background:#f0ebfa; color:var(--purple); width:42px; height:42px; border-radius:12px } .layout{ display:flex; max-width:1280px; margin:auto } .sidebar{ width:260px; padding:24px 16px; min-height:calc(100vh - 72px); border-right:1px solid var(--line); background:#fff } .nav{ display:flex; flex-direction:column; gap:6px } .nav button{ border:0; background:transparent; text-align:left; padding:13px 14px; border-radius:13px; color:#3f3a49 } .nav button.active, .nav button:hover{ background:#f0ebfa; color:var(--purple); font-weight:700 } .content{ flex:1; padding:28px; max-width:1000px } .hero{ background:linear-gradient(135deg,#fff,#f0eafb); border:1px solid var(--line); border-radius:28px; padding:32px; box-shadow:var(--shadow); margin-bottom:24px } .eyebrow{ color:var(--purple); font-weight:800; font-size:13px; letter-spacing:.08em; text-transform:uppercase } h1{ font-size:38px; line-height:1.08; margin:10px 0 8px } h2{ font-size:27px; margin:0 0 8px } h3{ margin:0 0 7px } p{ color:var(--muted); line-height:1.55 } .btn{ border:0; border-radius:13px; padding:12px 17px; font-weight:800 } .primary{ background:var(--purple); color:#fff } .secondary{ background:#fff; color:var(--purple); border:1px solid #cfc5e5 } .danger{ background:#fff0f1; color:#b4232c } .grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px } .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px; box-shadow:0 5px 18px rgba(42,25,82,.05) } .tile{ display:flex; gap:14px; align-items:center; min-height:92px; transition:.15s } .tile:hover{ transform:translateY(-2px); box-shadow:var(--shadow) } .tile .ico{ width:48px; height:48px; border-radius:14px; display:grid; place-items:center; font-size:24px; background:#f0ebfa } .tile small{color:var(--muted)} .row{ display:flex; justify-content:space-between; gap:12px; align-items:center } .stack{ display:flex; flex-direction:column; gap:14px } label{ font-size:13px; font-weight:800; color:#3e3948; display:block; margin-bottom:6px } input, textarea, select{ width:100%; border:1px solid #dcd5e8; background:#fff; border-radius:12px; padding:12px 13px; outline:none } textarea{ min-height:150px; resize:vertical } input:focus, textarea:focus, select:focus{ border-color:var(--purple); box-shadow:0 0 0 3px #eee8fa } .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px } .badge{ display:inline-flex; align-items:center; gap:5px; border-radius:999px; padding:6px 10px; font-size:12px; font-weight:800; background:#edf9f2; color:var(--green) } .badge.pending{ background:#fff5dc; color:#9a6a00 } .badge.locked{ background:#f1eef5; color:#5d5767 } .list{ display:flex; flex-direction:column; gap:10px } .list-item{ border:1px solid var(--line); border-radius:15px; padding:15px; background:#fff } .notice{ background:#f6f1ff; border:1px solid #ded3f4; padding:14px; border-radius:14px; color:#4a3b68 } .diary-entry{ border-left:4px solid var(--pink); padding:15px 17px; background:#fff; border-radius:0 15px 15px 0; border-top:1px solid var(--line); border-right:1px solid var(--line); border-bottom:1px solid var(--line) } .dot-grid{ display:grid; grid-template-columns:repeat(3,62px); gap:18px; justify-content:center; padding:18px } .dot{ width:62px; height:62px; border-radius:50%; border:2px solid #b9b1c7; background:#fff; position:relative } .dot.selected{ background:#a8dfb8; border-color:#49a96d } .dot.selected:after{ content:""; position:absolute; inset:15px; border-radius:50%; background:#fff } .pattern-area{ background:#131c29; border-radius:22px; padding:22px; color:#fff; text-align:center } .pattern-area p{color:#c6ccd6} .public-profile{ max-width:560px; margin:auto } .profile-cover{ background:linear-gradient(135deg,#4b24a8,#7c55dc); height:120px; border-radius:22px 22px 0 0 } .avatar{ width:84px; height:84px; border-radius:50%; background:#fff; border:5px solid #fff; box-shadow:var(--shadow); display:grid; place-items:center; font-size:30px; margin:-42px auto 8px; color:var(--purple) } .modal{ position:fixed; inset:0; background:rgba(20,14,30,.55); display:none; align-items:center; justify-content:center; padding:20px; z-index:50 } .modal.show{display:flex} .modal-box{ background:#fff; border-radius:22px; padding:24px; max-width:520px; width:100%; max-height:90vh; overflow:auto } .mobile-nav{display:none} .muted{color:var(--muted)} .check{ display:flex; align-items:center; gap:9px; padding:8px 0 } .check input{width:auto} /* ========================= DAY BY DAY SOCIAL BOARD ========================= */ .day-card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:18px; box-shadow:0 5px 18px rgba(42,25,82,.05) } .day-header{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px } .post-compose textarea{ min-height:110px } .post{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px; box-shadow:0 5px 18px rgba(42,25,82,.05) } .post-head{ display:flex; align-items:center; gap:11px } .post-avatar{ width:44px; height:44px; border-radius:50%; background:#f0ebfa; color:var(--purple); display:grid; place-items:center; font-weight:900 } .post-meta{ flex:1 } .post-meta strong{ display:block } .post-meta small{ color:var(--muted) } .post-body{ white-space:pre-wrap; word-break:break-word; margin:14px 0 8px; color:var(--ink); line-height:1.55 } .post-actions{ display:flex; gap:8px; border-top:1px solid var(--line); padding-top:12px; margin-top:12px } .action-btn{ border:0; background:#f7f5fb; color:#514b5f; border-radius:11px; padding:9px 12px; font-weight:700 } .action-btn.liked{ background:#fff0f6; color:#d12b7e } .comment-area{ margin-top:12px; padding-top:12px; border-top:1px solid var(--line); display:none } .comment-area.show{ display:block } .comment{ background:#f7f5fb; border-radius:13px; padding:10px 12px; margin-top:8px } .comment strong{ font-size:13px } .comment p{ margin:3px 0 0; color:var(--ink); white-space:pre-wrap } .day-divider{ display:flex; align-items:center; gap:10px; margin:22px 0 10px; color:var(--purple); font-weight:900 } .day-divider:after{ content:""; height:1px; background:#dcd5e8; flex:1 } .empty-social{ text-align:center; padding:30px 15px } .avatar-row{ display:flex; align-items:center; gap:10px } .small-action{ border:0; background:transparent; color:#8b8496; font-size:12px; padding:4px } /* ========================= MOBILE ========================= */ @media(max-width:820px){ .sidebar{ display:none } .content{ padding:18px 14px 90px } .grid{ grid-template-columns:1fr } .form-grid{ grid-template-columns:1fr } .topbar{ padding:0 14px } .mobile-nav{ display:flex; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); z-index:30; justify-content:space-around; padding:8px 4px } .mobile-nav button{ border:0; background:transparent; color:#625b70; font-size:10px; display:flex; flex-direction:column; align-items:center; gap:3px } .mobile-nav button.active{ color:var(--purple); font-weight:800 } .hero{ padding:24px } h1{ font-size:31px } .post-actions{ overflow-x:auto } .action-btn{ white-space:nowrap } } </style> </head> <body> <noscript> <div style="padding:20px;background:#fff0f1;color:#7a1f26;text-align:center;font-weight:700"> Willastate needs JavaScript enabled to use the interactive prototype. </div> </noscript> <div class="app"> <header class="topbar"> <div class="brand"> Willastate <span>🪶</span> </div> <div class="top-actions"> <button class="iconbtn" onclick="showPage('profile')">👤</button> <button class="iconbtn" onclick="showPage('settings')">⚙️</button> </div> </header> <div class="layout"> <aside class="sidebar"> <div class="nav" id="nav"></div> </aside> <main class="content" id="content"></main> </div> <nav class="mobile-nav" id="mobileNav"></nav> </div> <div class="modal" id="modal"> <div class="modal-box" id="modalBox"></div> </div> <script> /* ========================= NAVIGATION ========================= */ const pages = [ ['home','⌂','Home'], ['daybyday','📰','Day by Day'], ['will','✍️','My Will'], ['diary','📔','Mobile Diary'], ['info','📝','My Information'], ['messages','❤️','My Messages'], ['audio','🎙️','My Audio'], ['videos','🎥','My Videos'], ['docs','📄','My Documents'], ['codes','🔐','My Codes'], ['trusted','👥','My Trusted People'], ['settings','⚙️','My Settings'], ['profile','👤','My Profile'] ]; let current='home'; let diaryEntries = JSON.parse( localStorage.getItem('willastateDiary') || '[]' ); let trusted = JSON.parse( localStorage.getItem('willastateTrusted') || '[]' ); /* DAY BY DAY STORAGE */ let socialPosts = JSON.parse( localStorage.getItem('willastateDayByDay') || '[]' ); let pattern=[]; /* ========================= NAV ========================= */ function navHTML(){ return pages.map(([id,ic,name]) => ` <button class="${current===id?'active':''}" onclick="showPage('${id}')"> ${ic} ${name} </button> `).join(''); } function renderNav(){ document.getElementById('nav').innerHTML = navHTML(); const mobilePages = [ ['home','⌂','Home'], ['daybyday','📰','Day'], ['diary','📔','Diary'], ['messages','❤️','Messages'] ]; document.getElementById('mobileNav').innerHTML = mobilePages.map(([id,ic,name]) => ` <button class="${current===id?'active':''}" onclick="showPage('${id}')"> ${ic} <span>${name}</span> </button> `).join('') + ` <button class="${current==='trusted'?'active':''}" onclick="showPage('trusted')"> 👥 <span>People</span> </button> `; } function showPage(id){ current=id; renderNav(); const c=document.getElementById('content'); c.innerHTML=page(id); window.scrollTo(0,0); } /* ========================= PAGE ROUTER ========================= */ function page(id){ switch(id){ case 'home': return home(); case 'daybyday': return dayByDay(); case 'will': return simple( '✍️', 'My Will', 'Organize your wishes and estate information in one private place.', willForm() ); case 'diary': return diary(); case 'info': return simple( '📝', 'My Information', 'Personal information you want organized and protected.', infoForm() ); case 'messages': return simple( '❤️', 'My Messages', 'Write messages for the people you love and choose if and when they may be released.', messageForm() ); case 'audio': return media( '🎙️', 'My Audio', 'Record private voice messages and memories.', 'Record Audio' ); case 'videos': return media( '🎥', 'My Videos', 'Record private video messages and memories.', 'Record Video' ); case 'docs': return docs(); case 'codes': return codes(); case 'trusted': return trustedPage(); case 'settings': return settings(); case 'profile': return profile(); case 'release': return release(); default: return home(); } } /* ========================= HOME ========================= */ function home(){ return ` <section class="hero"> <div class="eyebrow"> Welcome to Willastate </div> <h1> Your life. Your way.<br> Your wishes. <span style="color:var(--purple)"> Your legacy. </span> </h1> <p> One private place for the information, memories, wishes and messages that matter most — for the people you trust, when they need it most. </p> <div style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn primary" onclick="showPage('daybyday')"> 📰 Open Day by Day </button> <button class="btn secondary" onclick="showPage('diary')"> 📔 Open My Mobile Diary </button> </div> </section> <div class="row" style="margin-bottom:12px"> <div> <h2>My Willastate</h2> <p style="margin:0"> Your social life and your private legacy — together, with a clear boundary. </p> </div> <span class="badge locked"> 🔒 Private by default </span> </div> <div class="grid"> ${tile( 'daybyday', '📰', 'Day by Day', 'See what people are sharing and share your day' )} ${tile( 'will', '✍️', 'My Will', 'Write and organize your will and wishes' )} ${tile( 'diary', '📔', 'My Mobile Diary', 'Write, record and journal your daily life' )} ${tile( 'info', '📝', 'My Information', 'Personal, family and important information' )} ${tile( 'messages', '❤️', 'My Messages', 'Important private messages for your loved ones' )} ${tile( 'audio', '🎙️', 'My Audio', 'Voice recordings and audio messages' )} ${tile( 'videos', '🎥', 'My Videos', 'Video messages and important moments' )} ${tile( 'docs', '📄', 'My Documents', 'Important documents and files' )} ${tile( 'codes', '🔐', 'My Codes', 'Secure codes, passwords and combinations' )} ${tile( 'trusted', '👥', 'My Trusted People', 'Manage your trusted people — 1 or 2 only' )} ${tile( 'settings', '⚙️', 'My Settings', 'Account security and preferences' )} </div> `; } function tile(id,ic,title,sub){ return ` <button class="card tile" style="border:1px solid var(--line);text-align:left" onclick="showPage('${id}')"> <div class="ico"> ${ic} </div> <div> <h3>${title}</h3> <small>${sub}</small> </div> <strong style="margin-left:auto;color:var(--purple)"> › </strong> </button> `; } function simple(ic,title,sub,body){ return ` <section class="hero" style="padding:24px"> <div class="eyebrow"> ${ic} Willastate </div> <h1 style="font-size:32px"> ${title} </h1> <p>${sub}</p> </section> ${body} `; } /* ========================================================= DAY BY DAY ========================================================= */ function dayByDay(){ const grouped={}; [...socialPosts] .sort((a,b)=>b.createdAt-a.createdAt) .forEach(post => { const key=post.dayKey; if(!grouped[key]){ grouped[key]=[]; } grouped[key].push(post); }); const dates=Object.keys(grouped); return ` <section class="hero" style="padding:24px"> <div class="eyebrow"> 📰 Willastate Social </div> <h1 style="font-size:32px"> Day by Day </h1> <p> Share what's happening in your world, see what others are sharing, and stay connected. Your private legacy information stays separate. </p> </section> <div class="day-card post-compose"> <div class="avatar-row" style="margin-bottom:12px"> <div class="post-avatar"> D </div> <div> <strong> Damion Owens </strong> <div class="muted" style="font-size:13px"> Share with the Willastate community </div> </div> </div> <textarea id="socialPostText" placeholder="What's happening in your world today?"> </textarea> <div class="row" style="margin-top:10px;align-items:center"> <div class="muted" style="font-size:12px"> 📰 Day by Day • Prototype </div> <button class="btn primary" onclick="createSocialPost()"> Post </button> </div> </div> <div style="height:10px"></div> <div id="socialFeed"> ${ dates.length ? dates.map(day => ` <div class="day-divider"> ${escapeHTML(day)} </div> <div class="stack"> ${grouped[day].map(postHTML).join('')} </div> `).join('') : ` <div class="card empty-social"> <div style="font-size:46px"> 📰 </div> <h3> Your Day by Day starts here. </h3> <p> Be the first to share something with the Willastate community. </p> </div> ` } </div> `; } /* ========================= POST HTML ========================= */ function postHTML(post){ const comments=post.comments || []; return ` <article class="post" id="post-${post.id}"> <div class="post-head"> <div class="post-avatar"> ${escapeHTML( (post.author || 'D') .charAt(0) .toUpperCase() )} </div> <div class="post-meta"> <strong> ${escapeHTML( post.author || 'Damion Owens' )} </strong> <small> ${escapeHTML(post.time || 'Today')} · Public Day by Day </small> </div> <button class="small-action" onclick="deleteSocialPost('${post.id}')"> Delete </button> </div> <div class="post-body"> ${escapeHTML(post.text)} </div> <div class="post-actions"> <button class="action-btn ${post.liked?'liked':''}" onclick="toggleLike('${post.id}')"> ${post.liked?'❤️':'♡'} Like ${post.likes ? `(${post.likes})` : ''} </button> <button class="action-btn" onclick="toggleComments('${post.id}')"> 💬 Comment ${comments.length ? `(${comments.length})` : '' } </button> </div> <div class="comment-area" id="comments-${post.id}"> <div class="stack"> ${ comments.map((comment,index) => ` <div class="comment"> <div class="row"> <strong> ${escapeHTML(comment.author)} </strong> <button class="small-action" onclick="deleteComment('${post.id}',${index})"> Delete </button> </div> <p> ${escapeHTML(comment.text)} </p> </div> `).join('') } </div> <div style="display:flex;gap:8px;margin-top:10px"> <input id="comment-${post.id}" placeholder="Write a comment..."> <button class="btn primary" onclick="addComment('${post.id}')"> Send </button> </div> </div> </article> `; } /* ========================= SOCIAL FUNCTIONS ========================= */ function todayLabel(){ return new Date().toLocaleDateString( undefined, { weekday:'long', month:'long', day:'numeric', year:'numeric' } ); } function timeLabel(){ return new Date().toLocaleTimeString( undefined, { hour:'numeric', minute:'2-digit' } ); } function createSocialPost(){ const el= document.getElementById( 'socialPostText' ); if(!el)return; const text=el.value.trim(); if(!text){ return toast( 'Write something first.' ); } const now=new Date(); socialPosts.unshift({ id:'p_'+Date.now(), author:'Damion Owens', text:text, createdAt:now.getTime(), dayKey:todayLabel(), time:timeLabel(), likes:0, liked:false, comments:[] }); saveSocial(); showPage('daybyday'); toast( 'Your Day by Day post was shared.' ); } function saveSocial(){ localStorage.setItem( 'willastateDayByDay', JSON.stringify(socialPosts) ); } function findPost(id){ return socialPosts.find( post => post.id===id ); } function toggleLike(id){ const post=findPost(id); if(!post)return; post.liked=!post.liked; post.likes=Math.max( 0, (post.likes || 0) + (post.liked ? 1 : -1) ); saveSocial(); showPage('daybyday'); } function toggleComments(id){ const box= document.getElementById( 'comments-'+id ); if(box){ box.classList.toggle( 'show' ); } } function addComment(id){ const input= document.getElementById( 'comment-'+id ); const text= input?.value.trim(); if(!text){ return toast( 'Write a comment first.' ); } const post=findPost(id); if(!post)return; post.comments= post.comments || []; post.comments.push({ author:'Damion Owens', text:text }); saveSocial(); showPage('daybyday'); setTimeout(() => { const box= document.getElementById( 'comments-'+id ); if(box){ box.classList.add( 'show' ); } },0); } function deleteComment(id,index){ const post=findPost(id); if(!post)return; post.comments.splice( index, 1 ); saveSocial(); showPage('daybyday'); } function deleteSocialPost(id){ if(!confirm( 'Delete this Day by Day post?' ))return; socialPosts= socialPosts.filter( post => post.id!==id ); saveSocial(); showPage('daybyday'); toast( 'Post deleted.' ); } /* ========================================================= EXISTING WILLASTATE FEATURES ========================================================= */ function willForm(){ return ` <div class="card stack"> <div class="notice"> This prototype helps you organize your wishes. Legal requirements for a valid will vary by state; Willastate does not currently certify this as a legally executed will. </div> <div class="form-grid"> <div> <label> Full legal name </label> <input placeholder="Your name"> </div> <div> <label> State </label> <input placeholder="Georgia"> </div> </div> <div> <label> My wishes </label> <textarea placeholder="Write your wishes and instructions..."> </textarea> </div> <div> <label> Funeral or final wishes </label> <textarea placeholder="Optional..."> </textarea> </div> <div class="row"> <span class="badge locked"> 🔒 Private </span> <button class="btn primary" onclick="toast('Will information saved in prototype.')"> Save My Will </button> </div> </div> `; } function diary(){ return ` <section class="hero" style="padding:24px"> <div class="row"> <div> <div class="eyebrow"> 📔 My Mobile Diary </div> <h1 style="font-size:32px"> Your private daily space. </h1> <p> Write, add a photo, record audio or video, and keep the moments you want to remember. </p> </div> <button class="btn secondary" onclick="toast('Calendar coming in the next build.')"> 📅 Calendar </button> </div> </section> <div class="card stack"> <div> <label> New diary entry </label> <textarea id="diaryText" placeholder="How was your day? What do you want to remember?"> </textarea> </div> <div class="row"> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn secondary" onclick="toast('Photo attachment will be connected in the backend build.')"> 🖼️ Add Photo </button> <button class="btn secondary" onclick="toast('Audio recording will be connected in the backend build.')"> 🎙️ Add Voice </button> <button class="btn secondary" onclick="toast('Video recording will be connected in the backend build.')"> 🎥 Add Video </button> </div> <button class="btn primary" onclick="saveDiary()"> Save Entry </button> </div> </div> <div style="height:16px"></div> <div class="stack"> ${ diaryEntries.length ? diaryEntries.map(entry => ` <article class="diary-entry"> <div class="row"> <strong> ${escapeHTML(entry.date)} </strong> <span class="badge locked"> 🔒 Private </span> </div> <p> ${escapeHTML(entry.text)} </p> </article> `).join('') : ` <div class="card"> <h3> No diary entries yet. </h3> <p> Your first entry will appear here. </p> </div> ` } </div> `; } function saveDiary(){ const t= document .getElementById('diaryText') .value .trim(); if(!t){ return toast( 'Write something first.' ); } diaryEntries.unshift({ date:new Date() .toLocaleString(), text:t }); localStorage.setItem( 'willastateDiary', JSON.stringify(diaryEntries) ); showPage('diary'); } function infoForm(){ return ` <div class="card stack"> <div class="form-grid"> <div> <label> Full name </label> <input placeholder="Your name"> </div> <div> <label> Preferred phone </label> <input placeholder="(000) 000-0000"> </div> <div> <label> Important family contact </label> <input placeholder="Name"> </div> <div> <label> Other notes </label> <input placeholder="Optional"> </div> </div> <div> <label> Important information </label> <textarea placeholder="Information you want organized privately..."> </textarea> </div> <button class="btn primary" onclick="toast('Information saved in prototype.')"> Save Information </button> </div> `; } function messageForm(){ return ` <div class="card stack"> <div> <label> Message title </label> <input placeholder="For my family"> </div> <div> <label> Message </label> <textarea placeholder="Write your message..."> </textarea> </div> <div class="form-grid"> <div> <label> Who can receive it? </label> <select> <option> Choose recipients </option> <option> My Trusted Person #1 </option> <option> My Trusted Person #2 </option> <option> Multiple recipients </option> </select> </div> <div> <label> When? </label> <select> <option> Verified death </option> <option> Approved emergency circumstance </option> <option> Manual release by me </option> </select> </div> </div> <button class="btn primary" onclick="toast('Message saved in prototype.')"> Save Message </button> </div> `; } function media(ic,title,sub,action){ return ` <section class="hero" style="padding:24px"> <div class="eyebrow"> ${ic} Willastate </div> <h1 style="font-size:32px"> ${title} </h1> <p>${sub}</p> </section> <div class="card" style="text-align:center;padding:40px"> <div style="font-size:64px"> ${ic} </div> <h2> Keep your memories private. </h2> <p> Camera and microphone permissions will be connected in the working mobile build. </p> <button class="btn primary" onclick="toast('${action} will be connected in the backend/mobile build.')"> ${action} </button> </div> `; } function docs(){ return simple( '📄', 'My Documents', 'Keep important documents organized and private.', ` <div class="card stack"> <div class="notice"> Files will be stored in private storage in the production build. Public links will not be used for private documents. </div> <button class="btn primary" onclick="toast('Secure file upload will be connected next.')"> ＋ Add Document </button> <div class="list"> <div class="list-item row"> <div> <strong> Example document </strong> <div class="muted"> Prototype only </div> </div> <span class="badge locked"> 🔒 Private </span> </div> </div> </div> ` ); } /* ========================= MY CODES ========================= */ function codes(){ return simple( '🔐', 'My Codes', 'A high-security area for codes and other secrets you choose to store.', ` <div class="pattern-area"> <div style="font-size:30px"> 🔒 </div> <h2 style="color:#fff"> Unlock My Codes </h2> <p> Enter your 9-dot pattern. </p> <div class="dot-grid" id="dots"> ${Array.from( {length:9}, (_,i) => ` <button class="dot" onclick="selectDot(${i})" aria-label="Pattern dot ${i+1}"> </button> ` ).join('')} </div> <div id="patternMsg" style="color:#9de0b5;min-height:24px"> </div> <button class="btn secondary" onclick="resetPattern()"> Reset Pattern </button> <div style="margin-top:18px;border:1px solid #425064;border-radius:14px;padding:12px;text-align:left"> <strong> Security reminder </strong> <p style="margin:4px 0;color:#c6ccd6"> Never share your pattern. The production version will use stronger authentication and protected storage. </p> </div> </div> <div style="height:16px"></div> <div class="card"> <h3> Example vault items </h3> <div class="list"> <div class="list-item row"> <span> Phone access code </span> <span class="badge locked"> 🔒 Locked </span> </div> <div class="list-item row"> <span> Safe combination </span> <span class="badge locked"> 🔒 Locked </span> </div> <div class="list-item row"> <span> Other private code </span> <span class="badge locked"> 🔒 Locked </span> </div> </div> </div> ` ); } function selectDot(i){ if(pattern.includes(i))return; pattern.push(i); document .querySelectorAll('.dot')[i] .classList.add('selected'); if(pattern.length>=4){ document .getElementById('patternMsg') .textContent= 'Pattern entered — prototype unlock accepted.'; } } function resetPattern(){ pattern=[]; document .querySelectorAll('.dot') .forEach(dot => dot.classList.remove('selected') ); const m= document.getElementById( 'patternMsg' ); if(m)m.textContent=''; } /* ========================= TRUSTED PEOPLE ========================= */ function trustedPage(){ return ` <section class="hero" style="padding:24px"> <div class="eyebrow"> 👥 My Trusted People </div> <h1 style="font-size:32px"> Choose 1 or 2 people you trust. </h1> <p> They must knowingly accept the responsibility. They do not get access to your private information simply by becoming a Trusted Person. </p> </section> <div class="grid"> <div class="card stack"> <h3> Invite a Trusted Person </h3> <div> <label> Full name </label> <input id="tpName" placeholder="Sarah Johnson"> </div> <div> <label> Email address </label> <input id="tpEmail" type="email" placeholder="sarah@example.com"> </div> <button class="btn primary" onclick="inviteTrusted()"> Send Invitation </button> <small class="muted"> If they are not a Willastate member, the email will invite them to create a free account and accept or decline. </small> </div> <div class="card"> <h3> Your Trusted People </h3> <div class="list" id="trustedList"> ${ trusted.length ? trusted.map((t,i) => ` <div class="list-item"> <div class="row"> <strong> ${escapeHTML(t.name)} </strong> <span class="badge ${ t.status==='Confirmed' ? '' : 'pending' }"> ${ t.status==='Confirmed' ? '🟢' : '🟡' } ${t.status} </span> </div> <div class="muted"> ${escapeHTML(t.email)} </div> <div style="margin-top:10px"> <button class="btn danger" onclick="removeTrusted(${i})"> Remove </button> </div> </div> `).join('') : `<p> You haven't selected anyone yet. </p>` } </div> </div> </div> <div style="height:16px"></div> <div class="card"> <h3> How the invitation works </h3> <div class="list"> <div class="list-item"> 1. You send the invitation by email. </div> <div class="list-item"> 2. They create or sign into Willastate. </div> <div class="list-item"> 3. They review the responsibility and Accept or Decline. </div> <div class="list-item"> 4. Only after accepting are they a confirmed Trusted Person. </div> </div> </div> <div style="height:16px"></div> <div class="card"> <h3> Release settings </h3> <p> Trusted People are limited to 1–2, but individual information can be released to multiple recipients. </p> <button class="btn secondary" onclick="showPage('release')"> Open Release Settings </button> </div> `; } function inviteTrusted(){ const n= document .getElementById('tpName') .value .trim(); const e= document .getElementById('tpEmail') .value .trim(); if(!n || !e){ return toast( 'Enter a name and email.' ); } if(trusted.length>=2){ return toast( 'You can have only 2 Trusted People.' ); } trusted.push({ name:n, email:e, status:'Invitation Sent' }); localStorage.setItem( 'willastateTrusted', JSON.stringify(trusted) ); showPage('trusted'); toast( 'Invitation created. In the production build this will send a secure email invitation.' ); } function removeTrusted(i){ trusted.splice(i,1); localStorage.setItem( 'willastateTrusted', JSON.stringify(trusted) ); showPage('trusted'); } /* ========================= RELEASE SETTINGS ========================= */ function release(){ return ` <section class="hero" style="padding:24px"> <div class="eyebrow"> Release Settings </div> <h1 style="font-size:32px"> You decide who gets what and when. </h1> <p> Set different recipients and release circumstances for individual items. </p> </section> <div class="card stack"> <div> <label> What is this? </label> <input value="Financial Instructions"> </div> <div> <label> Who can receive this? </label> ${ [ 'Sarah Johnson', 'Michael Owens', 'Jessica Owens', 'Robert Williams' ].map((x,i) => ` <label class="check"> <input type="checkbox" ${i<3?'checked':''}> ${x} </label> `).join('') } </div> <div> <label> When should it be released? </label> ${ [ 'Verified death', 'Approved emergency circumstance', 'Manual release by me' ].map(x => ` <label class="check"> <input type="checkbox" checked> ${x} </label> `).join('') } </div> <div> <label> What should they receive? </label> <select> <option> All authorized information </option> <option> Only this item </option> <option> Custom selection </option> </select> </div> <button class="btn primary" onclick="toast('Release settings saved in prototype.')"> Save Release Setting </button> </div> `; } /* ========================= SETTINGS ========================= */ function settings(){ return simple( '⚙️', 'My Settings', 'Control your account, security and privacy.', ` <div class="grid"> <div class="card"> <h3> 🔐 Account Security </h3> <p> Two-factor authentication will be available in the production account system. </p> <button class="btn secondary" onclick="toast('Security settings are part of Phase 2.')"> Manage Security </button> </div> <div class="card"> <h3> 🔒 Privacy </h3> <p> Your private vault is designed to be private by default. Public profiles reveal only information you choose. </p> <button class="btn secondary" onclick="toast('Privacy controls are coming next.')"> Privacy Controls </button> </div> <div class="card"> <h3> 📋 Activity </h3> <p> Review important account and release activity. </p> <button class="btn secondary" onclick="toast('Activity log is planned for the secure backend build.')"> View Activity </button> </div> <div class="card"> <h3> 🚪 Account </h3> <button class="btn danger" onclick="toast('Logout will be connected when real authentication is added.')"> Log Out </button> </div> </div> ` ); } /* ========================= PROFILE ========================= */ function profile(){ return ` <section class="public-profile"> <div class="card" style="padding:0;overflow:hidden"> <div class="profile-cover"></div> <div style="padding:0 22px 24px;text-align:center"> <div class="avatar"> 👤 </div> <h2> Damion Owens </h2> <p style="margin-top:0"> Willastate Member </p> <div class="notice" style="text-align:left"> <strong> 👥 Trusted Contact Available </strong> <br> <span class="muted"> A trusted person has been designated for this account. Their private contact information is not displayed publicly. </span> </div> <button class="btn primary" style="margin-top:14px" onclick="openModal( 'Contact Trusted Person', 'Send a secure message to the designated Trusted Person. Their email address will remain private.' )"> Contact Trusted Person </button> </div> </div> </section> `; } /* ========================= MODAL ========================= */ function openModal(title,text){ document.getElementById('modalBox').innerHTML= ` <div class="row"> <h2> ${title} </h2> <button class="iconbtn" onclick="closeModal()"> ✕ </button> </div> <p> ${text} </p> <label> Your name </label> <input placeholder="Your name"> <label style="margin-top:12px"> Message </label> <textarea placeholder="I need to contact the Willastate Trusted Person because..."> </textarea> <button class="btn primary" style="margin-top:14px" onclick="closeModal();toast('Secure contact request created in prototype.')"> Send Secure Request </button> `; document .getElementById('modal') .classList.add('show'); } function closeModal(){ document .getElementById('modal') .classList.remove('show'); } /* ========================= TOAST ========================= */ function toast(msg){ const t= document.createElement('div'); t.textContent=msg; t.style= 'position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#171522;color:white;padding:13px 17px;border-radius:12px;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:90%;text-align:center'; document.body.appendChild(t); setTimeout( () => t.remove(), 2800 ); } /* ========================= SECURITY ========================= */ function escapeHTML(s){ return String(s).replace( /[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;' }[c]) ); } /* ========================= MODAL CLICK ========================= */ window.addEventListener( 'click', e => { if(e.target.id==='modal'){ closeModal(); } } ); /* ========================= START ========================= */ renderNav(); showPage('home'); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4b24a8">
+<title>Willastate — Your life. Your way. Your wishes. Your legacy.</title>
+
+<style>
+:root{
+  --purple:#4b24a8;
+  --purple2:#6b42d8;
+  --ink:#171522;
+  --muted:#6d6878;
+  --bg:#f7f5fb;
+  --card:#fff;
+  --line:#e8e3f1;
+  --green:#1f9d62;
+  --pink:#e94f9d;
+  --shadow:0 10px 30px rgba(42,25,82,.10);
+  --radius:20px;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+
+.app{min-height:100vh}
+
+.topbar{
+  height:72px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.brand{
+  font-family:Georgia,serif;
+  color:var(--purple);
+  font-size:25px;
+  font-weight:700;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.brand span{font-size:18px}
+
+.top-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.iconbtn{
+  border:0;
+  background:#f0ebfa;
+  color:var(--purple);
+  width:42px;
+  height:42px;
+  border-radius:12px;
+}
+
+.layout{
+  display:flex;
+  max-width:1280px;
+  margin:auto;
+}
+
+.sidebar{
+  width:260px;
+  padding:24px 16px;
+  min-height:calc(100vh - 72px);
+  border-right:1px solid var(--line);
+  background:#fff;
+}
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.nav button{
+  border:0;
+  background:transparent;
+  text-align:left;
+  padding:13px 14px;
+  border-radius:13px;
+  color:#3f3a49;
+}
+
+.nav button.active,
+.nav button:hover{
+  background:#f0ebfa;
+  color:var(--purple);
+  font-weight:700;
+}
+
+.content{
+  flex:1;
+  padding:28px;
+  max-width:1000px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#fff,#f0eafb);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:32px;
+  box-shadow:var(--shadow);
+  margin-bottom:24px;
+}
+
+.eyebrow{
+  color:var(--purple);
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+h1{
+  font-size:38px;
+  line-height:1.08;
+  margin:10px 0 8px;
+}
+
+h2{
+  font-size:27px;
+  margin:0 0 8px;
+}
+
+h3{margin:0 0 7px}
+
+p{
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:12px 17px;
+  font-weight:800;
+}
+
+.primary{
+  background:var(--purple);
+  color:#fff;
+}
+
+.secondary{
+  background:#fff;
+  color:var(--purple);
+  border:1px solid #cfc5e5;
+}
+
+.danger{
+  background:#fff0f1;
+  color:#b4232c;
+}
+
+.success{
+  background:#edf9f2;
+  color:#147a49;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:0 5px 18px rgba(42,25,82,.05);
+}
+
+.tile{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  min-height:92px;
+  transition:.15s;
+}
+
+.tile:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.tile .ico{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:24px;
+  background:#f0ebfa;
+}
+
+.tile small{color:var(--muted)}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+}
+
+.stack{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+label{
+  font-size:13px;
+  font-weight:800;
+  color:#3e3948;
+  display:block;
+  margin-bottom:6px;
+}
+
+input,textarea,select{
+  width:100%;
+  border:1px solid #dcd5e8;
+  background:#fff;
+  border-radius:12px;
+  padding:12px 13px;
+  outline:none;
+}
+
+textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px #eee8fa;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:800;
+  background:#edf9f2;
+  color:var(--green);
+}
+
+.badge.pending{
+  background:#fff5dc;
+  color:#9a6a00;
+}
+
+.badge.locked{
+  background:#f1eef5;
+  color:#5d5767;
+}
+
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.list-item{
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:15px;
+  background:#fff;
+}
+
+.notice{
+  background:#f6f1ff;
+  border:1px solid #ded3f4;
+  padding:14px;
+  border-radius:14px;
+  color:#4a3b68;
+}
+
+.diary-entry{
+  border-left:4px solid var(--pink);
+  padding:15px 17px;
+  background:#fff;
+  border-radius:0 15px 15px 0;
+  border-top:1px solid var(--line);
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.message-post{
+  border-left:4px solid var(--purple);
+  padding:17px;
+  background:#fff;
+  border-radius:0 15px 15px 0;
+  border:1px solid var(--line);
+}
+
+.message-post.board{
+  border-left-color:#6b42d8;
+}
+
+.dot-grid{
+  display:grid;
+  grid-template-columns:repeat(3,62px);
+  gap:18px;
+  justify-content:center;
+  padding:18px;
+}
+
+.dot{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  border:2px solid #b9b1c7;
+  background:#fff;
+  position:relative;
+}
+
+.dot.selected{
+  background:#a8dfb8;
+  border-color:#49a96d;
+}
+
+.dot.selected:after{
+  content:"";
+  position:absolute;
+  inset:15px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.pattern-area{
+  background:#131c29;
+  border-radius:22px;
+  padding:22px;
+  color:#fff;
+  text-align:center;
+}
+
+.pattern-area p{color:#c6ccd6}
+
+.mobile-nav{
+  display:none;
+}
+
+.muted{color:var(--muted)}
+
+.check{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:8px 0;
+}
+
+.check input{width:auto}
+
+.empty{
+  text-align:center;
+  padding:30px 15px;
+}
+
+.date-heading{
+  background:#f0ebfa;
+  color:var(--purple);
+  border-radius:12px;
+  padding:10px 13px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.small-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.small-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--purple);
+  border-radius:10px;
+  padding:8px 11px;
+  font-weight:700;
+}
+
+.small-btn.delete{
+  color:#b4232c;
+  background:#fff0f1;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(20,14,30,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:50;
+}
+
+.modal.show{display:flex}
+
+.modal-box{
+  background:#fff;
+  border-radius:22px;
+  padding:24px;
+  max-width:520px;
+  width:100%;
+  max-height:90vh;
+  overflow:auto;
+}
+
+.mobile-preview{
+  max-width:390px;
+  margin:0 auto;
+  border:10px solid #17151d;
+  border-radius:38px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.mobile-head{
+  height:58px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+  color:var(--purple);
+  font-weight:800;
+}
+
+.mobile-body{
+  padding:16px;
+  max-height:650px;
+  overflow:auto;
+}
+
+.public-profile{
+  max-width:560px;
+  margin:auto;
+}
+
+.profile-cover{
+  background:linear-gradient(135deg,#4b24a8,#7c55dc);
+  height:120px;
+  border-radius:22px 22px 0 0;
+}
+
+.avatar{
+  width:84px;
+  height:84px;
+  border-radius:50%;
+  background:#fff;
+  border:5px solid #fff;
+  box-shadow:var(--shadow);
+  display:grid;
+  place-items:center;
+  font-size:30px;
+  margin:-42px auto 8px;
+  color:var(--purple);
+}
+
+@media(max-width:820px){
+
+  .sidebar{display:none}
+
+  .content{
+    padding:18px 14px 90px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .topbar{
+    padding:0 14px;
+  }
+
+  .mobile-nav{
+    display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#fff;
+    border-top:1px solid var(--line);
+    z-index:30;
+    justify-content:space-around;
+    padding:8px 4px;
+  }
+
+  .mobile-nav button{
+    border:0;
+    background:transparent;
+    color:#625b70;
+    font-size:11px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:3px;
+  }
+
+  .mobile-nav button.active{
+    color:var(--purple);
+    font-weight:800;
+  }
+
+  .hero{padding:24px}
+
+  h1{font-size:31px}
+
+  .row{
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<noscript>
+<div style="padding:20px;background:#fff0f1;color:#7a1f26;text-align:center;font-weight:700">
+Willastate needs JavaScript enabled to use the interactive prototype.
+</div>
+</noscript>
+
+<div class="app">
+
+<header class="topbar">
+  <div class="brand">Willastate <span>🪶</span></div>
+
+  <div class="top-actions">
+    <button class="iconbtn" onclick="showPage('profile')">👤</button>
+    <button class="iconbtn" onclick="showPage('settings')">⚙️</button>
+  </div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="nav" id="nav"></div>
+</aside>
+
+<main class="content" id="content"></main>
+
+</div>
+
+<nav class="mobile-nav" id="mobileNav"></nav>
+
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<script>
+
+/* =========================================================
+   WILLASTATE PROTOTYPE
+   Local browser storage version
+   ========================================================= */
+
+const pages = [
+ ['home','⌂','Home'],
+ ['will','✍️','My Will'],
+ ['diary','📔','Mobile Diary'],
+ ['board','💬','Message Board'],
+ ['info','📝','My Information'],
+ ['messages','❤️','My Messages'],
+ ['audio','🎙️','My Audio'],
+ ['videos','🎥','My Videos'],
+ ['docs','📄','My Documents'],
+ ['codes','🔐','My Codes'],
+ ['trusted','👥','My Trusted People'],
+ ['settings','⚙️','My Settings'],
+ ['profile','👤','My Profile']
+];
+
+let current='home';
+
+/* =========================================================
+   LOCAL STORAGE HELPERS
+   ========================================================= */
+
+function loadData(key, fallback){
+  try{
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : fallback;
+  }catch(error){
+    console.error("Could not load",key,error);
+    return fallback;
+  }
+}
+
+function saveData(key,data){
+  try{
+    localStorage.setItem(key,JSON.stringify(data));
+    return true;
+  }catch(error){
+    console.error("Could not save",key,error);
+    toast("The browser could not save this information.");
+    return false;
+  }
+}
+
+let diaryEntries = loadData('willastateDiary',[]);
+let trusted = loadData('willastateTrusted',[]);
+let willData = loadData('willastateWill',null);
+let infoData = loadData('willastateInformation',null);
+let messages = loadData('willastateMessages',[]);
+let boardPosts = loadData('willastateMessageBoard',[]);
+let codesData = loadData('willastateCodes',[]);
+
+let pattern=[];
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function navHTML(){
+  return pages.map(([id,ic,name])=>`
+    <button class="${current===id?'active':''}"
+      onclick="showPage('${id}')">
+      ${ic} ${name}
+    </button>
+  `).join('');
+}
+
+function renderNav(){
+
+  document.getElementById('nav').innerHTML=navHTML();
+
+  const mobilePages=[
+    ['home','⌂','Home'],
+    ['diary','📔','Diary'],
+    ['board','💬','Board'],
+    ['trusted','👥','People']
+  ];
+
+  document.getElementById('mobileNav').innerHTML=
+    mobilePages.map(([id,ic,name])=>`
+      <button class="${current===id?'active':''}"
+        onclick="showPage('${id}')">
+        ${ic}<span>${name}</span>
+      </button>
+    `).join('');
+}
+
+function showPage(id){
+  current=id;
+  renderNav();
+
+  const c=document.getElementById('content');
+
+  c.innerHTML=page(id);
+
+  window.scrollTo(0,0);
+}
+
+function page(id){
+
+  switch(id){
+
+    case 'home':
+      return home();
+
+    case 'will':
+      return willPage();
+
+    case 'diary':
+      return diary();
+
+    case 'board':
+      return messageBoard();
+
+    case 'info':
+      return informationPage();
+
+    case 'messages':
+      return messagesPage();
+
+    case 'audio':
+      return media(
+        '🎙️',
+        'My Audio',
+        'Record private voice messages and memories.',
+        'Record Audio'
+      );
+
+    case 'videos':
+      return media(
+        '🎥',
+        'My Videos',
+        'Record private video messages and memories.',
+        'Record Video'
+      );
+
+    case 'docs':
+      return docs();
+
+    case 'codes':
+      return codes();
+
+    case 'trusted':
+      return trustedPage();
+
+    case 'settings':
+      return settings();
+
+    case 'profile':
+      return profile();
+
+    case 'release':
+      return release();
+
+    default:
+      return home();
+  }
+}
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
+function home(){
+
+return `
+<section class="hero">
+
+  <div class="eyebrow">Welcome to Willastate</div>
+
+  <h1>
+    Your life. Your way.<br>
+    Your wishes.
+    <span style="color:var(--purple)">Your legacy.</span>
+  </h1>
+
+  <p>
+    One private place for the information, memories, wishes and
+    messages that matter most — for the people you trust,
+    when they need it most.
+  </p>
+
+  <button class="btn primary" onclick="showPage('board')">
+    💬 Open Message Board
+  </button>
+
+</section>
+
+<div class="row" style="margin-bottom:12px">
+
+  <div>
+    <h2>My Willastate</h2>
+    <p style="margin:0">
+      Everything you need, all in one place.
+    </p>
+  </div>
+
+  <span class="badge locked">
+    🔒 Private by default
+  </span>
+
+</div>
+
+<div class="grid">
+
+ ${tile(
+   'will',
+   '✍️',
+   'My Will',
+   'Write and organize your will and wishes'
+ )}
+
+ ${tile(
+   'diary',
+   '📔',
+   'My Mobile Diary',
+   'Write, record and journal your daily life'
+ )}
+
+ ${tile(
+   'board',
+   '💬',
+   'Day-by-Day Message Board',
+   'Share daily thoughts and messages'
+ )}
+
+ ${tile(
+   'info',
+   '📝',
+   'My Information',
+   'Personal, family and important information'
+ )}
+
+ ${tile(
+   'messages',
+   '❤️',
+   'My Messages',
+   'Important messages for your loved ones'
+ )}
+
+ ${tile(
+   'audio',
+   '🎙️',
+   'My Audio',
+   'Voice recordings and audio messages'
+ )}
+
+ ${tile(
+   'videos',
+   '🎥',
+   'My Videos',
+   'Video messages and important moments'
+ )}
+
+ ${tile(
+   'docs',
+   '📄',
+   'My Documents',
+   'Important documents and files'
+ )}
+
+ ${tile(
+   'codes',
+   '🔐',
+   'My Codes',
+   'Secure codes, passwords and combinations'
+ )}
+
+ ${tile(
+   'trusted',
+   '👥',
+   'My Trusted People',
+   'Manage your trusted people — 1 or 2 only'
+ )}
+
+ ${tile(
+   'settings',
+   '⚙️',
+   'My Settings',
+   'Account security and preferences'
+ )}
+
+</div>
+`;
+}
+
+function tile(id,ic,title,sub){
+
+return `
+<button
+ class="card tile"
+ style="border:1px solid var(--line);text-align:left"
+ onclick="showPage('${id}')">
+
+ <div class="ico">${ic}</div>
+
+ <div>
+   <h3>${title}</h3>
+   <small>${sub}</small>
+ </div>
+
+ <strong style="margin-left:auto;color:var(--purple)">
+   ›
+ </strong>
+
+</button>
+`;
+}
+
+function simple(ic,title,sub,body){
+
+return `
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">
+   ${ic} Willastate
+ </div>
+
+ <h1 style="font-size:32px">
+   ${title}
+ </h1>
+
+ <p>${sub}</p>
+
+</section>
+
+${body}
+`;
+}
+
+/* =========================================================
+   MY WILL
+   ========================================================= */
+
+function willPage(){
+
+const editing=!!willData;
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">✍️ Willastate</div>
+
+ <h1 style="font-size:32px">
+   My Will
+ </h1>
+
+ <p>
+   Organize your wishes and estate information
+   in one private place.
+ </p>
+
+</section>
+
+<div class="card stack">
+
+ <div class="notice">
+   This prototype helps you organize your wishes.
+   Legal requirements for a valid will vary by state.
+   Willastate does not currently certify this as a
+   legally executed will.
+ </div>
+
+ <div class="form-grid">
+
+   <div>
+     <label>Full legal name</label>
+     <input
+       id="willName"
+       value="${escapeAttr(willData?.name || '')}"
+       placeholder="Your name">
+   </div>
+
+   <div>
+     <label>State</label>
+     <input
+       id="willState"
+       value="${escapeAttr(willData?.state || '')}"
+       placeholder="Georgia">
+   </div>
+
+ </div>
+
+ <div>
+   <label>My wishes</label>
+
+   <textarea
+     id="willWishes"
+     placeholder="Write your wishes and instructions...">${escapeHTML(willData?.wishes || '')}</textarea>
+ </div>
+
+ <div>
+   <label>Funeral or final wishes</label>
+
+   <textarea
+     id="willFuneral"
+     placeholder="Optional...">${escapeHTML(willData?.funeral || '')}</textarea>
+ </div>
+
+ <div class="row">
+
+   <span class="badge locked">
+     🔒 Private
+   </span>
+
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+     ${
+       editing
+       ? `
+       <button class="btn danger"
+         onclick="deleteWill()">
+         Delete
+       </button>
+       `
+       : ''
+     }
+
+     <button class="btn primary"
+       onclick="saveWill()">
+       ${editing?'Save Changes':'Save My Will'}
+     </button>
+
+   </div>
+
+ </div>
+
+</div>
+
+${
+ willData
+ ? `
+ <div style="height:16px"></div>
+
+ <div class="card">
+
+   <div class="row">
+
+     <div>
+       <h3>Saved Will</h3>
+       <p style="margin:0">
+         Last saved: ${escapeHTML(willData.savedAt)}
+       </p>
+     </div>
+
+     <span class="badge">
+       ✓ Saved
+     </span>
+
+   </div>
+
+ </div>
+ `
+ : ''
+}
+
+`;
+}
+
+function saveWill(){
+
+const name=document.getElementById('willName').value.trim();
+const state=document.getElementById('willState').value.trim();
+const wishes=document.getElementById('willWishes').value.trim();
+const funeral=document.getElementById('willFuneral').value.trim();
+
+if(!name){
+  return toast('Please enter your full legal name.');
+}
+
+willData={
+ name,
+ state,
+ wishes,
+ funeral,
+ savedAt:new Date().toLocaleString()
+};
+
+if(saveData('willastateWill',willData)){
+  toast('My Will saved successfully.');
+  showPage('will');
+}
+
+}
+
+function deleteWill(){
+
+confirmDelete(
+ 'Delete My Will?',
+ 'This will remove your saved Will information from this prototype.',
+ ()=>{
+   localStorage.removeItem('willastateWill');
+   willData=null;
+   toast('My Will deleted.');
+   showPage('will');
+ }
+);
+
+}
+
+/* =========================================================
+   MOBILE DIARY
+   ========================================================= */
+
+function diary(){
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="row">
+
+   <div>
+
+     <div class="eyebrow">
+       📔 My Mobile Diary
+     </div>
+
+     <h1 style="font-size:32px">
+       Your private daily space.
+     </h1>
+
+     <p>
+       Write, add a photo, record audio or video,
+       and keep the moments you want to remember.
+     </p>
+
+   </div>
+
+   <button class="btn secondary"
+     onclick="toast('Calendar will be connected in a future build.')">
+     📅 Calendar
+   </button>
+
+ </div>
+
+</section>
+
+<div class="card stack">
+
+ <div>
+
+   <label>New diary entry</label>
+
+   <textarea
+     id="diaryText"
+     placeholder="How was your day? What do you want to remember?"></textarea>
+
+ </div>
+
+ <div class="row">
+
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+     <button class="btn secondary"
+       onclick="toast('Photo attachment will be connected in the backend build.')">
+       🖼️ Add Photo
+     </button>
+
+     <button class="btn secondary"
+       onclick="toast('Audio recording will be connected in the backend build.')">
+       🎙️ Add Voice
+     </button>
+
+     <button class="btn secondary"
+       onclick="toast('Video recording will be connected in the backend build.')">
+       🎥 Add Video
+     </button>
+
+   </div>
+
+   <button class="btn primary"
+     onclick="saveDiary()">
+     Save Entry
+   </button>
+
+ </div>
+
+</div>
+
+<div style="height:16px"></div>
+
+<div class="stack">
+
+ ${
+   diaryEntries.length
+   ?
+   diaryEntries.map((e,i)=>`
+
+   <article class="diary-entry">
+
+     <div class="row">
+
+       <strong>${escapeHTML(e.date)}</strong>
+
+       <span class="badge locked">
+         🔒 Private
+       </span>
+
+     </div>
+
+     <p>
+       ${escapeHTML(e.text)}
+     </p>
+
+     <div class="small-actions">
+
+       <button class="small-btn"
+         onclick="editDiary(${i})">
+         ✏️ Edit
+       </button>
+
+       <button class="small-btn delete"
+         onclick="deleteDiary(${i})">
+         🗑️ Delete
+       </button>
+
+     </div>
+
+   </article>
+
+   `).join('')
+
+   :
+
+   `
+   <div class="card empty">
+
+     <h3>No diary entries yet.</h3>
+
+     <p>
+       Your first entry will appear here.
+     </p>
+
+   </div>
+   `
+ }
+
+</div>
+
+`;
+}
+
+function saveDiary(){
+
+const input=document.getElementById('diaryText');
+
+const text=input.value.trim();
+
+if(!text){
+  return toast('Write something first.');
+}
+
+diaryEntries.unshift({
+  id:Date.now(),
+  date:new Date().toLocaleString(),
+  text:text
+});
+
+if(saveData('willastateDiary',diaryEntries)){
+  input.value='';
+  toast('Diary entry saved.');
+  showPage('diary');
+}
+
+}
+
+function editDiary(index){
+
+const entry=diaryEntries[index];
+
+const newText=prompt(
+ 'Edit your diary entry:',
+ entry.text
+);
+
+if(newText===null)return;
+
+const text=newText.trim();
+
+if(!text){
+  return toast('The diary entry cannot be empty.');
+}
+
+diaryEntries[index].text=text;
+diaryEntries[index].editedAt=new Date().toLocaleString();
+
+saveData('willastateDiary',diaryEntries);
+
+toast('Diary entry updated.');
+
+showPage('diary');
+
+}
+
+function deleteDiary(index){
+
+confirmDelete(
+ 'Delete Diary Entry?',
+ 'This diary entry will be permanently removed from this prototype.',
+ ()=>{
+   diaryEntries.splice(index,1);
+   saveData('willastateDiary',diaryEntries);
+   toast('Diary entry deleted.');
+   showPage('diary');
+ }
+);
+
+}
+
+/* =========================================================
+   DAY-BY-DAY MESSAGE BOARD
+   ========================================================= */
+
+function messageBoard(){
+
+const todayKey=new Date().toISOString().split('T')[0];
+
+const todayPosts=boardPosts.filter(
+ p=>p.dayKey===todayKey
+);
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">
+   💬 Willastate Community
+ </div>
+
+ <h1 style="font-size:32px">
+   Day-by-Day Message Board
+ </h1>
+
+ <p>
+   A place to share your thoughts, encouragement,
+   memories and daily messages.
+ </p>
+
+ <span class="badge">
+   📅 ${new Date().toLocaleDateString()}
+ </span>
+
+</section>
+
+<div class="card stack">
+
+ <div>
+   <label>Your name</label>
+
+   <input
+     id="boardName"
+     placeholder="Your name">
+ </div>
+
+ <div>
+   <label>Today's message</label>
+
+   <textarea
+     id="boardText"
+     placeholder="What would you like to say today?"></textarea>
+ </div>
+
+ <div class="row">
+
+   <span class="badge locked">
+     🌎 Community Prototype
+   </span>
+
+   <button class="btn primary"
+     onclick="postBoardMessage()">
+     Post Message
+   </button>
+
+ </div>
+
+</div>
+
+<div style="height:16px"></div>
+
+<div class="card">
+
+ <div class="row">
+
+   <div>
+     <h2>Today's Messages</h2>
+     <p style="margin:0">
+       Messages posted today appear here.
+     </p>
+   </div>
+
+   <span class="badge">
+     ${todayPosts.length} Posted
+   </span>
+
+ </div>
+
+</div>
+
+<div style="height:12px"></div>
+
+<div class="stack">
+
+ ${
+   todayPosts.length
+   ?
+   todayPosts.map(p=>{
+
+     const index=boardPosts.indexOf(p);
+
+     return `
+
+     <article class="message-post board">
+
+       <div class="row">
+
+         <strong>
+           ${escapeHTML(p.name)}
+         </strong>
+
+         <span class="muted">
+           ${escapeHTML(p.time)}
+         </span>
+
+       </div>
+
+       <p>
+         ${escapeHTML(p.text)}
+       </p>
+
+       <div class="small-actions">
+
+         <button class="small-btn"
+           onclick="editBoardMessage(${index})">
+           ✏️ Edit
+         </button>
+
+         <button class="small-btn delete"
+           onclick="deleteBoardMessage(${index})">
+           🗑️ Delete
+         </button>
+
+       </div>
+
+     </article>
+
+     `;
+   }).join('')
+   :
+   `
+   <div class="card empty">
+
+     <h3>No messages posted today.</h3>
+
+     <p>
+       Be the first person to post today's message.
+     </p>
+
+   </div>
+   `
+ }
+
+</div>
+
+<div style="height:20px"></div>
+
+<div class="notice">
+
+<strong>Prototype note:</strong>
+
+The Message Board currently stores posts only
+in this browser. When we build the real Willastate
+backend, this can become a true member-based
+social/message system with accounts, moderation,
+privacy controls and daily posts.
+
+</div>
+
+`;
+}
+
+function postBoardMessage(){
+
+const name=document.getElementById('boardName').value.trim();
+const text=document.getElementById('boardText').value.trim();
+
+if(!name){
+  return toast('Please enter your name.');
+}
+
+if(!text){
+  return toast('Please write a message.');
+}
+
+const now=new Date();
+
+boardPosts.unshift({
+  id:Date.now(),
+  dayKey:now.toISOString().split('T')[0],
+  name:name,
+  text:text,
+  time:now.toLocaleTimeString([],{
+    hour:'numeric',
+    minute:'2-digit'
+  })
+});
+
+if(saveData('willastateMessageBoard',boardPosts)){
+  toast('Message posted.');
+  showPage('board');
+}
+
+}
+
+function editBoardMessage(index){
+
+const post=boardPosts[index];
+
+const newText=prompt(
+ 'Edit your message:',
+ post.text
+);
+
+if(newText===null)return;
+
+if(!newText.trim()){
+  return toast('Message cannot be empty.');
+}
+
+boardPosts[index].text=newText.trim();
+
+saveData('willastateMessageBoard',boardPosts);
+
+toast('Message updated.');
+
+showPage('board');
+
+}
+
+function deleteBoardMessage(index){
+
+confirmDelete(
+ 'Delete Message?',
+ 'This message will be removed from the Message Board.',
+ ()=>{
+   boardPosts.splice(index,1);
+   saveData('willastateMessageBoard',boardPosts);
+   toast('Message deleted.');
+   showPage('board');
+ }
+);
+
+}
+
+/* =========================================================
+   MY INFORMATION
+   ========================================================= */
+
+function informationPage(){
+
+const editing=!!infoData;
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">
+   📝 Willastate
+ </div>
+
+ <h1 style="font-size:32px">
+   My Information
+ </h1>
+
+ <p>
+   Personal information you want organized
+   and protected.
+ </p>
+
+</section>
+
+<div class="card stack">
+
+ <div class="form-grid">
+
+   <div>
+
+     <label>Full name</label>
+
+     <input
+       id="infoName"
+       value="${escapeAttr(infoData?.name || '')}"
+       placeholder="Your name">
+
+   </div>
+
+   <div>
+
+     <label>Preferred phone</label>
+
+     <input
+       id="infoPhone"
+       value="${escapeAttr(infoData?.phone || '')}"
+       placeholder="(000) 000-0000">
+
+   </div>
+
+   <div>
+
+     <label>Important family contact</label>
+
+     <input
+       id="infoFamily"
+       value="${escapeAttr(infoData?.family || '')}"
+       placeholder="Name">
+
+   </div>
+
+   <div>
+
+     <label>Other notes</label>
+
+     <input
+       id="infoNotes"
+       value="${escapeAttr(infoData?.notes || '')}"
+       placeholder="Optional">
+
+   </div>
+
+ </div>
+
+ <div>
+
+   <label>
+     Important information
+   </label>
+
+   <textarea
+     id="infoImportant"
+     placeholder="Information you want organized privately...">${escapeHTML(infoData?.important || '')}</textarea>
+
+ </div>
+
+ <div class="row">
+
+   <span class="badge locked">
+     🔒 Private
+   </span>
+
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+     ${
+       editing
+       ?
+       `
+       <button class="btn danger"
+         onclick="deleteInformation()">
+         Delete
+       </button>
+       `
+       :
+       ''
+     }
+
+     <button class="btn primary"
+       onclick="saveInformation()">
+       ${editing?'Save Changes':'Save Information'}
+     </button>
+
+   </div>
+
+ </div>
+
+</div>
+
+${
+ infoData
+ ?
+ `
+ <div style="height:16px"></div>
+
+ <div class="card">
+
+   <div class="row">
+
+     <div>
+
+       <h3>Information Saved</h3>
+
+       <p style="margin:0">
+         Last saved:
+         ${escapeHTML(infoData.savedAt)}
+       </p>
+
+     </div>
+
+     <span class="badge">
+       ✓ Saved
+     </span>
+
+   </div>
+
+ </div>
+ `
+ :
+ ''
+}
+
+`;
+}
+
+function saveInformation(){
+
+const name=document.getElementById('infoName').value.trim();
+const phone=document.getElementById('infoPhone').value.trim();
+const family=document.getElementById('infoFamily').value.trim();
+const notes=document.getElementById('infoNotes').value.trim();
+const important=document.getElementById('infoImportant').value.trim();
+
+if(!name){
+  return toast('Please enter your name.');
+}
+
+infoData={
+ name,
+ phone,
+ family,
+ notes,
+ important,
+ savedAt:new Date().toLocaleString()
+};
+
+if(saveData('willastateInformation',infoData)){
+  toast('My Information saved successfully.');
+  showPage('info');
+}
+
+}
+
+function deleteInformation(){
+
+confirmDelete(
+ 'Delete My Information?',
+ 'This will remove your saved information from this prototype.',
+ ()=>{
+   localStorage.removeItem('willastateInformation');
+   infoData=null;
+   toast('My Information deleted.');
+   showPage('info');
+ }
+);
+
+}
+
+/* =========================================================
+   MY MESSAGES
+   ========================================================= */
+
+function messagesPage(){
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">
+   ❤️ Willastate
+ </div>
+
+ <h1 style="font-size:32px">
+   My Messages
+ </h1>
+
+ <p>
+   Write messages for the people you love and
+   choose if and when they may be released.
+ </p>
+
+</section>
+
+<div class="card stack">
+
+ <div>
+   <label>Message title</label>
+
+   <input
+     id="messageTitle"
+     placeholder="For my family">
+ </div>
+
+ <div>
+   <label>Message</label>
+
+   <textarea
+     id="messageText"
+     placeholder="Write your message..."></textarea>
+ </div>
+
+ <div class="form-grid">
+
+   <div>
+
+     <label>
+       Who can receive it?
+     </label>
+
+     <select id="messageRecipient">
+
+       <option>
+         Choose recipients
+       </option>
+
+       <option>
+         My Trusted Person #1
+       </option>
+
+       <option>
+         My Trusted Person #2
+       </option>
+
+       <option>
+         Multiple recipients
+       </option>
+
+     </select>
+
+   </div>
+
+   <div>
+
+     <label>
+       When?
+     </label>
+
+     <select id="messageRelease">
+
+       <option>
+         Verified death
+       </option>
+
+       <option>
+         Approved emergency circumstance
+       </option>
+
+       <option>
+         Manual release by me
+       </option>
+
+     </select>
+
+   </div>
+
+ </div>
+
+ <button class="btn primary"
+   onclick="saveMessage()">
+   Save Message
+ </button>
+
+</div>
+
+<div style="height:16px"></div>
+
+<div class="stack">
+
+ ${
+   messages.length
+   ?
+   messages.map((m,i)=>`
+
+   <article class="message-post">
+
+     <div class="row">
+
+       <strong>
+         ${escapeHTML(m.title)}
+       </strong>
+
+       <span class="badge locked">
+         🔒 Private
+       </span>
+
+     </div>
+
+     <p>
+       ${escapeHTML(m.text)}
+     </p>
+
+     <div class="muted">
+       Recipient:
+       ${escapeHTML(m.recipient)}
+       <br>
+       Release:
+       ${escapeHTML(m.release)}
+     </div>
+
+     <div class="small-actions">
+
+       <button class="small-btn"
+         onclick="editMessage(${i})">
+         ✏️ Edit
+       </button>
+
+       <button class="small-btn delete"
+         onclick="deleteMessage(${i})">
+         🗑️ Delete
+       </button>
+
+     </div>
+
+   </article>
+
+   `).join('')
+   :
+   `
+   <div class="card empty">
+
+     <h3>No saved messages yet.</h3>
+
+     <p>
+       Your private messages will appear here.
+     </p>
+
+   </div>
+   `
+ }
+
+</div>
+
+`;
+}
+
+function saveMessage(){
+
+const title=document.getElementById('messageTitle').value.trim();
+const text=document.getElementById('messageText').value.trim();
+const recipient=document.getElementById('messageRecipient').value;
+const release=document.getElementById('messageRelease').value;
+
+if(!title){
+  return toast('Please enter a message title.');
+}
+
+if(!text){
+  return toast('Please write your message.');
+}
+
+messages.unshift({
+ id:Date.now(),
+ title,
+ text,
+ recipient,
+ release,
+ savedAt:new Date().toLocaleString()
+});
+
+if(saveData('willastateMessages',messages)){
+  toast('Message saved.');
+  showPage('messages');
+}
+
+}
+
+function editMessage(index){
+
+const m=messages[index];
+
+const newTitle=prompt(
+ 'Edit message title:',
+ m.title
+);
+
+if(newTitle===null)return;
+
+const newText=prompt(
+ 'Edit message:',
+ m.text
+);
+
+if(newText===null)return;
+
+if(!newTitle.trim()||!newText.trim()){
+  return toast('Title and message cannot be empty.');
+}
+
+m.title=newTitle.trim();
+m.text=newText.trim();
+m.editedAt=new Date().toLocaleString();
+
+saveData('willastateMessages',messages);
+
+toast('Message updated.');
+
+showPage('messages');
+
+}
+
+function deleteMessage(index){
+
+confirmDelete(
+ 'Delete Message?',
+ 'This private message will be permanently removed.',
+ ()=>{
+   messages.splice(index,1);
+   saveData('willastateMessages',messages);
+   toast('Message deleted.');
+   showPage('messages');
+ }
+);
+
+}
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+function media(ic,title,sub,action){
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">
+   ${ic} Willastate
+ </div>
+
+ <h1 style="font-size:32px">
+   ${title}
+ </h1>
+
+ <p>${sub}</p>
+
+</section>
+
+<div class="card" style="text-align:center;padding:40px">
+
+ <div style="font-size:64px">
+   ${ic}
+ </div>
+
+ <h2>
+   Keep your memories private.
+ </h2>
+
+ <p>
+   Camera and microphone permissions will be
+   connected in the working mobile build.
+ </p>
+
+ <button class="btn primary"
+   onclick="toast('${action} will be connected in the backend/mobile build.')">
+   ${action}
+ </button>
+
+</div>
+
+`;
+}
+
+/* =========================================================
+   DOCUMENTS
+   ========================================================= */
+
+function docs(){
+
+return simple(
+ '📄',
+ 'My Documents',
+ 'Keep important documents organized and private.',
+ `
+
+ <div class="card stack">
+
+   <div class="notice">
+     Files will be stored in private storage in the
+     production build. Public links will not be used
+     for private documents.
+   </div>
+
+   <button class="btn primary"
+     onclick="toast('Secure file upload will be connected next.')">
+     ＋ Add Document
+   </button>
+
+   <div class="list">
+
+     <div class="list-item row">
+
+       <div>
+         <strong>Example document</strong>
+         <div class="muted">
+           Prototype only
+         </div>
+       </div>
+
+       <span class="badge locked">
+         🔒 Private
+       </span>
+
+     </div>
+
+   </div>
+
+ </div>
+
+ `
+);
+
+}
+
+/* =========================================================
+   CODES
+   ========================================================= */
+
+function codes(){
+
+return simple(
+ '🔐',
+ 'My Codes',
+ 'A high-security area for codes and other secrets you choose to store.',
+ `
+
+ <div class="pattern-area">
+
+   <div style="font-size:30px">
+     🔒
+   </div>
+
+   <h2 style="color:#fff">
+     Unlock My Codes
+   </h2>
+
+   <p>
+     Enter your 9-dot pattern.
+   </p>
+
+   <div class="dot-grid" id="dots">
+
+     ${Array.from(
+       {length:9},
+       (_,i)=>`
+       <button
+         class="dot"
+         onclick="selectDot(${i})"
+         aria-label="Pattern dot ${i+1}">
+       </button>
+       `
+     ).join('')}
+
+   </div>
+
+   <div
+     id="patternMsg"
+     style="color:#9de0b5;min-height:24px">
+   </div>
+
+   <button
+     class="btn secondary"
+     onclick="resetPattern()">
+     Reset Pattern
+   </button>
+
+   <div style="margin-top:18px;border:1px solid #425064;border-radius:14px;padding:12px;text-align:left">
+
+     <strong>
+       Security reminder
+     </strong>
+
+     <p style="margin:4px 0;color:#c6ccd6">
+       Never share your pattern. The production
+       version will use stronger authentication
+       and protected storage.
+     </p>
+
+   </div>
+
+ </div>
+
+ <div style="height:16px"></div>
+
+ <div class="card">
+
+   <div class="row">
+
+     <h3>
+       My Code Items
+     </h3>
+
+     <button
+       class="small-btn"
+       onclick="addCode()">
+       ＋ Add Code
+     </button>
+
+   </div>
+
+   <div class="list">
+
+     ${
+       codesData.length
+       ?
+       codesData.map((c,i)=>`
+
+       <div class="list-item">
+
+         <div class="row">
+
+           <strong>
+             ${escapeHTML(c.name)}
+           </strong>
+
+           <span class="badge locked">
+             🔒 Protected
+           </span>
+
+         </div>
+
+         <div class="muted">
+           ${escapeHTML(c.value)}
+         </div>
+
+         <div class="small-actions">
+
+           <button class="small-btn"
+             onclick="editCode(${i})">
+             ✏️ Edit
+           </button>
+
+           <button class="small-btn delete"
+             onclick="deleteCode(${i})">
+             🗑️ Delete
+           </button>
+
+         </div>
+
+       </div>
+
+       `).join('')
+       :
+       `
+       <div class="empty">
+         <p>
+           No code items saved yet.
+         </p>
+       </div>
+       `
+     }
+
+   </div>
+
+ </div>
+
+ `
+);
+
+}
+
+function selectDot(i){
+
+if(pattern.includes(i))return;
+
+pattern.push(i);
+
+const dots=document.querySelectorAll('.dot');
+
+if(dots[i]){
+  dots[i].classList.add('selected');
+}
+
+if(pattern.length>=4){
+
+document.getElementById('patternMsg').textContent=
+'Pattern entered — prototype unlock accepted.';
+
+}
+
+}
+
+function resetPattern(){
+
+pattern=[];
+
+document.querySelectorAll('.dot')
+.forEach(d=>d.classList.remove('selected'));
+
+const m=document.getElementById('patternMsg');
+
+if(m)m.textContent='';
+
+}
+
+function addCode(){
+
+const name=prompt('Code name:');
+
+if(name===null)return;
+
+if(!name.trim())return;
+
+const value=prompt('Code or combination:');
+
+if(value===null)return;
+
+if(!value.trim())return;
+
+codesData.push({
+ id:Date.now(),
+ name:name.trim(),
+ value:value.trim()
+});
+
+saveData('willastateCodes',codesData);
+
+toast('Code saved.');
+
+showPage('codes');
+
+}
+
+function editCode(index){
+
+const code=codesData[index];
+
+const name=prompt(
+ 'Edit code name:',
+ code.name
+);
+
+if(name===null)return;
+
+const value=prompt(
+ 'Edit code:',
+ code.value
+);
+
+if(value===null)return;
+
+if(!name.trim()||!value.trim()){
+  return toast('Code information cannot be empty.');
+}
+
+code.name=name.trim();
+code.value=value.trim();
+
+saveData('willastateCodes',codesData);
+
+toast('Code updated.');
+
+showPage('codes');
+
+}
+
+function deleteCode(index){
+
+confirmDelete(
+ 'Delete Code?',
+ 'This code will be removed from the prototype.',
+ ()=>{
+   codesData.splice(index,1);
+   saveData('willastateCodes',codesData);
+   toast('Code deleted.');
+   showPage('codes');
+ }
+);
+
+}
+
+/* =========================================================
+   TRUSTED PEOPLE
+   ========================================================= */
+
+function trustedPage(){
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">
+   👥 My Trusted People
+ </div>
+
+ <h1 style="font-size:32px">
+   Choose 1 or 2 people you trust.
+ </h1>
+
+ <p>
+   They must knowingly accept the responsibility.
+   They do not get access to your private information
+   simply by becoming a Trusted Person.
+ </p>
+
+</section>
+
+<div class="grid">
+
+ <div class="card stack">
+
+   <h3>
+     Invite a Trusted Person
+   </h3>
+
+   <div>
+
+     <label>
+       Full name
+     </label>
+
+     <input
+       id="tpName"
+       placeholder="Sarah Johnson">
+
+   </div>
+
+   <div>
+
+     <label>
+       Email address
+     </label>
+
+     <input
+       id="tpEmail"
+       type="email"
+       placeholder="sarah@example.com">
+
+   </div>
+
+   <button
+     class="btn primary"
+     onclick="inviteTrusted()">
+     Send Invitation
+   </button>
+
+   <small class="muted">
+     If they are not a Willastate member,
+     the email will invite them to create a free
+     account and accept or decline.
+   </small>
+
+ </div>
+
+ <div class="card">
+
+   <h3>
+     Your Trusted People
+   </h3>
+
+   <div class="list">
+
+     ${
+       trusted.length
+       ?
+       trusted.map((t,i)=>`
+
+       <div class="list-item">
+
+         <div class="row">
+
+           <strong>
+             ${escapeHTML(t.name)}
+           </strong>
+
+           <span class="badge ${t.status==='Confirmed'?'':'pending'}">
+
+             ${t.status==='Confirmed'?'🟢':'🟡'}
+
+             ${escapeHTML(t.status)}
+
+           </span>
+
+         </div>
+
+         <div class="muted">
+           ${escapeHTML(t.email)}
+         </div>
+
+         <div class="small-actions">
+
+           <button
+             class="small-btn"
+             onclick="editTrusted(${i})">
+             ✏️ Edit
+           </button>
+
+           <button
+             class="small-btn delete"
+             onclick="removeTrusted(${i})">
+             🗑️ Delete
+           </button>
+
+         </div>
+
+       </div>
+
+       `).join('')
+       :
+       `
+       <p>
+         You haven't selected anyone yet.
+       </p>
+       `
+     }
+
+   </div>
+
+ </div>
+
+</div>
+
+<div style="height:16px"></div>
+
+<div class="card">
+
+ <h3>
+   How the invitation works
+ </h3>
+
+ <div class="list">
+
+   <div class="list-item">
+     1. You send the invitation by email.
+   </div>
+
+   <div class="list-item">
+     2. They create or sign into Willastate.
+   </div>
+
+   <div class="list-item">
+     3. They review the responsibility and
+     Accept or Decline.
+   </div>
+
+   <div class="list-item">
+     4. Only after accepting are they a confirmed
+     Trusted Person.
+   </div>
+
+ </div>
+
+</div>
+
+<div style="height:16px"></div>
+
+<div class="card">
+
+ <h3>
+   Release settings
+ </h3>
+
+ <p>
+   Trusted People are limited to 1–2, but
+   individual information can be released to
+   multiple recipients.
+ </p>
+
+ <button
+   class="btn secondary"
+   onclick="showPage('release')">
+   Open Release Settings
+ </button>
+
+</div>
+
+`;
+}
+
+function inviteTrusted(){
+
+const n=document.getElementById('tpName').value.trim();
+const e=document.getElementById('tpEmail').value.trim();
+
+if(!n||!e){
+  return toast('Enter a name and email.');
+}
+
+if(trusted.length>=2){
+  return toast('You can have only 2 Trusted People.');
+}
+
+trusted.push({
+ id:Date.now(),
+ name:n,
+ email:e,
+ status:'Invitation Sent'
+});
+
+saveData('willastateTrusted',trusted);
+
+toast(
+ 'Invitation created. In the production build this will send a secure email invitation.'
+);
+
+showPage('trusted');
+
+}
+
+function editTrusted(index){
+
+const t=trusted[index];
+
+const name=prompt(
+ 'Edit Trusted Person name:',
+ t.name
+);
+
+if(name===null)return;
+
+const email=prompt(
+ 'Edit email address:',
+ t.email
+);
+
+if(email===null)return;
+
+if(!name.trim()||!email.trim()){
+  return toast('Name and email cannot be empty.');
+}
+
+t.name=name.trim();
+t.email=email.trim();
+
+saveData('willastateTrusted',trusted);
+
+toast('Trusted Person updated.');
+
+showPage('trusted');
+
+}
+
+function removeTrusted(index){
+
+confirmDelete(
+ 'Remove Trusted Person?',
+ 'This person will be removed from your Trusted People list.',
+ ()=>{
+   trusted.splice(index,1);
+   saveData('willastateTrusted',trusted);
+   toast('Trusted Person removed.');
+   showPage('trusted');
+ }
+);
+
+}
+
+/* =========================================================
+   RELEASE SETTINGS
+   ========================================================= */
+
+function release(){
+
+return `
+
+<section class="hero" style="padding:24px">
+
+ <div class="eyebrow">
+   Release Settings
+ </div>
+
+ <h1 style="font-size:32px">
+   You decide who gets what and when.
+ </h1>
+
+ <p>
+   Set different recipients and release circumstances
+   for individual items.
+ </p>
+
+</section>
+
+<div class="card stack">
+
+ <div>
+
+   <label>
+     What is this?
+   </label>
+
+   <input
+     value="Financial Instructions">
+
+ </div>
+
+ <div>
+
+   <label>
+     Who can receive this?
+   </label>
+
+   ${[
+     'Sarah Johnson',
+     'Michael Owens',
+     'Jessica Owens',
+     'Robert Williams'
+   ].map((x,i)=>`
+
+     <label class="check">
+
+       <input
+         type="checkbox"
+         ${i<3?'checked':''}>
+
+       ${x}
+
+     </label>
+
+   `).join('')}
+
+ </div>
+
+ <div>
+
+   <label>
+     When should it be released?
+   </label>
+
+   ${[
+     'Verified death',
+     'Approved emergency circumstance',
+     'Manual release by me'
+   ].map(x=>`
+
+     <label class="check">
+
+       <input
+         type="checkbox"
+         checked>
+
+       ${x}
+
+     </label>
+
+   `).join('')}
+
+ </div>
+
+ <div>
+
+   <label>
+     What should they receive?
+   </label>
+
+   <select>
+
+     <option>
+       All authorized information
+     </option>
+
+     <option>
+       Only this item
+     </option>
+
+     <option>
+       Custom selection
+     </option>
+
+   </select>
+
+ </div>
+
+ <button
+   class="btn primary"
+   onclick="toast('Release settings saved in prototype.')">
+   Save Release Setting
+ </button>
+
+</div>
+
+`;
+}
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+function settings(){
+
+return simple(
+ '⚙️',
+ 'My Settings',
+ 'Control your account, security and privacy.',
+ `
+
+ <div class="grid">
+
+   <div class="card">
+
+     <h3>
+       🔐 Account Security
+     </h3>
+
+     <p>
+       Two-factor authentication will be available
+       in the production account system.
+     </p>
+
+     <button
+       class="btn secondary"
+       onclick="toast('Security settings are part of Phase 2.')">
+       Manage Security
+     </button>
+
+   </div>
+
+   <div class="card">
+
+     <h3>
+       🔒 Privacy
+     </h3>
+
+     <p>
+       Your private vault is designed to be private
+       by default. Public profiles reveal only
+       information you choose.
+     </p>
+
+     <button
+       class="btn secondary"
+       onclick="toast('Privacy controls are coming next.')">
+       Privacy Controls
+     </button>
+
+   </div>
+
+   <div class="card">
+
+     <h3>
+       📋 Activity
+     </h3>
+
+     <p>
+       Review important account and release activity.
+     </p>
+
+     <button
+       class="btn secondary"
+       onclick="toast('Activity log is planned for the secure backend build.')">
+       View Activity
+     </button>
+
+   </div>
+
+   <div class="card">
+
+     <h3>
+       🚪 Account
+     </h3>
+
+     <button
+       class="btn danger"
+       onclick="toast('Logout will be connected when real authentication is added.')">
+       Log Out
+     </button>
+
+   </div>
+
+ </div>
+
+ `
+);
+
+}
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+function profile(){
+
+return `
+
+<section class="public-profile">
+
+ <div class="card" style="padding:0;overflow:hidden">
+
+   <div class="profile-cover"></div>
+
+   <div style="padding:0 22px 24px;text-align:center">
+
+     <div class="avatar">
+       👤
+     </div>
+
+     <h2>
+       Damion Owens
+     </h2>
+
+     <p style="margin-top:0">
+       Willastate Member
+     </p>
+
+     <div class="notice" style="text-align:left">
+
+       <strong>
+         👥 Trusted Contact Available
+       </strong>
+
+       <br>
+
+       <span class="muted">
+         A trusted person has been designated
+         for this account. Their private contact
+         information is not displayed publicly.
+       </span>
+
+     </div>
+
+     <button
+       class="btn primary"
+       style="margin-top:14px"
+       onclick="openModal(
+         'Contact Trusted Person',
+         'Send a secure message to the designated Trusted Person. Their email address will remain private.'
+       )">
+
+       Contact Trusted Person
+
+     </button>
+
+   </div>
+
+ </div>
+
+</section>
+
+`;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+function openModal(title,text){
+
+document.getElementById('modalBox').innerHTML=`
+
+<div class="row">
+
+ <h2>
+   ${title}
+ </h2>
+
+ <button
+   class="iconbtn"
+   onclick="closeModal()">
+   ✕
+ </button>
+
+</div>
+
+<p>
+ ${text}
+</p>
+
+<label>
+ Your name
+</label>
+
+<input
+ placeholder="Your name">
+
+<label style="margin-top:12px">
+ Message
+</label>
+
+<textarea
+ placeholder="I need to contact the Willastate Trusted Person because...">
+</textarea>
+
+<button
+ class="btn primary"
+ style="margin-top:14px"
+ onclick="closeModal();toast('Secure contact request created in prototype.')">
+
+ Send Secure Request
+
+</button>
+
+`;
+
+document.getElementById('modal').classList.add('show');
+
+}
+
+function closeModal(){
+
+document.getElementById('modal')
+.classList.remove('show');
+
+}
+
+/* =========================================================
+   DELETE CONFIRMATION
+   ========================================================= */
+
+function confirmDelete(title,text,callback){
+
+document.getElementById('modalBox').innerHTML=`
+
+<div style="text-align:center">
+
+ <div style="font-size:48px">
+   ⚠️
+ </div>
+
+ <h2>
+   ${title}
+ </h2>
+
+ <p>
+   ${text}
+ </p>
+
+ <div
+   style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px">
+
+   <button
+     class="btn secondary"
+     onclick="closeModal()">
+     Cancel
+   </button>
+
+   <button
+     class="btn danger"
+     id="confirmDeleteButton">
+     Delete
+   </button>
+
+ </div>
+
+</div>
+
+`;
+
+document.getElementById('confirmDeleteButton')
+.onclick=function(){
+
+  closeModal();
+  callback();
+
+};
+
+document.getElementById('modal')
+.classList.add('show');
+
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function toast(msg){
+
+const t=document.createElement('div');
+
+t.textContent=msg;
+
+t.style=`
+position:fixed;
+left:50%;
+bottom:30px;
+transform:translateX(-50%);
+background:#171522;
+color:white;
+padding:13px 17px;
+border-radius:12px;
+z-index:100;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+max-width:90%;
+text-align:center;
+`;
+
+document.body.appendChild(t);
+
+setTimeout(()=>{
+  t.remove();
+},2800);
+
+}
+
+/* =========================================================
+   SECURITY / HTML HELPERS
+   ========================================================= */
+
+function escapeHTML(s){
+
+return String(s||'').replace(
+  /[&<>"']/g,
+  c=>({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+  }[c])
+);
+
+}
+
+function escapeAttr(s){
+
+return escapeHTML(s);
+
+}
+
+/* =========================================================
+   CLOSE MODAL WHEN BACKGROUND IS CLICKED
+   ========================================================= */
+
+window.addEventListener('click',e=>{
+
+if(e.target.id==='modal'){
+  closeModal();
+}
+
+});
+
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
+
+renderNav();
+showPage('home');
+
+</script>
+
+</body>
+</html>
